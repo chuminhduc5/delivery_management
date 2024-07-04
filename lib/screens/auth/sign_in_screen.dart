@@ -1,13 +1,11 @@
+import '../../app.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../app.dart';
 import '../../blocs/sign_in_bloc/sign_in_bloc.dart';
 import '../../utils/notification_message.dart';
 import '../../widgets/auth/button_widget.dart';
 import '../../widgets/auth/text_field_auth_widget.dart';
-
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -18,12 +16,13 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
-  final accountController = TextEditingController();
+  final usernameController = TextEditingController();
   final passwordController = TextEditingController();
   bool obscurePassword = true;
   IconData iconPassword = CupertinoIcons.eye_slash;
+
   //String? _errorMsg;
-  bool isSuccess = true;
+  //bool isSuccess = true;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class _SignInScreenState extends State<SignInScreen> {
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => const App()),
-                    (route) => false);
+                (route) => false);
           }
         },
         builder: (context, state) {
@@ -57,10 +56,10 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                     Container(
                         child: Image.asset(
-                          'assets/images/logo.png',
-                          width: 200,
-                          height: 200,
-                        )),
+                      'assets/images/logo.png',
+                      width: 200,
+                      height: 200,
+                    )),
                     const SizedBox(
                       height: 50,
                     ),
@@ -71,14 +70,14 @@ class _SignInScreenState extends State<SignInScreen> {
                             SizedBox(
                               width: MediaQuery.of(context).size.width,
                               child: TextFieldAuthWidget(
-                                  controller: accountController,
+                                  controller: usernameController,
                                   hinText: 'Tài khoản',
                                   obscureText: false,
                                   keyboardType: TextInputType.emailAddress,
                                   prefixIcon: const Icon(CupertinoIcons.person),
                                   //errorMsg: _errorMsg,
                                   autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
+                                      AutovalidateMode.onUserInteraction,
                                   validator: (val) {
                                     if (val!.isEmpty) {
                                       return "Vui lòng nhập tài khoản";
@@ -90,7 +89,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               height: 25,
                             ),
                             SizedBox(
-                              width: MediaQuery.of(context).size.width ,
+                              width: MediaQuery.of(context).size.width,
                               child: TextFieldAuthWidget(
                                 controller: passwordController,
                                 hinText: 'Password',
@@ -99,7 +98,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                 prefixIcon: const Icon(CupertinoIcons.lock),
                                 //errorMsg: _errorMsg,
                                 autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
+                                    AutovalidateMode.onUserInteraction,
                                 validator: (val) {
                                   if (val!.isEmpty) {
                                     return 'Vui lòng nhập mật khẩu';
@@ -123,18 +122,18 @@ class _SignInScreenState extends State<SignInScreen> {
                             ),
                             const SizedBox(height: 30),
                             SizedBox(
-                              width: MediaQuery.of(context).size.width ,
+                              width: MediaQuery.of(context).size.width,
                               child: ButtonWidget(
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
                                       context
                                           .read<SignInBloc>()
                                           .add(AuthSignInRequested(
-                                        account:
-                                        accountController.text.trim(),
-                                        password:
-                                        passwordController.text.trim(),
-                                      ));
+                                            username:
+                                                usernameController.text.trim(),
+                                            password:
+                                                passwordController.text.trim(),
+                                          ));
                                     }
                                   },
                                   textButton: 'Đăng nhập'),

@@ -5,9 +5,9 @@ sealed class SignInEvent {}
 
 // Sự kiện khi bấm button SignIn
 final class AuthSignInRequested extends SignInEvent{
-  final String account;
+  final String username;
   final String password;
 
-  AuthSignInRequested({required this.account, required this.password});
+  AuthSignInRequested({required this.username, required this.password});
 }
 

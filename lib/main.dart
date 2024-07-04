@@ -1,11 +1,14 @@
 import 'package:delivery_management/screens/auth/sign_in_screen.dart';
 import 'package:delivery_management/screens/delivery_screen.dart';
+import 'package:delivery_management/service/auth_service.dart';
+import 'package:delivery_management/simple_bloc_observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'app.dart';
 import 'blocs/sign_in_bloc/sign_in_bloc.dart';
 
 void main() {
+  Bloc.observer = SimpleBlocObserver();
   runApp(const MyApp());
 }
 
@@ -15,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SignInBloc(),
+      create: (context) => SignInBloc(AuthService()),
       child: MaterialApp(
         initialRoute: '/',
         routes: {
@@ -24,8 +27,8 @@ class MyApp extends StatelessWidget {
         },
         //home: const TransportStaffScreen(),
         //home: const App(),
-        //home: const SignInScreen(),
-        home: const DeliveryScreen(),
+        home: const SignInScreen(),
+        //home: const DeliveryScreen(),
         debugShowCheckedModeBanner: false,
       ),
     );

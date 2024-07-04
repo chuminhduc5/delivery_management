@@ -1,16 +1,24 @@
 # delivery_management
+A new Delivery Management project.
 
-A new Flutter project.
+### BLoc
+- sign_in_bloc: Quản lý trạng thái đăng nhập
+- delivery_bloc: Quản lý trạng thái khi lấy dữ liệu giao vận qua API
+- technique_bloc: Quản lý trạng thái khi lấy dữ liệu danh sách đơn hàng kiểm tra kĩ thuật qua API
 
-## Getting Started
+### Screen
+- home_screen: Màn trang chủ
+- order_screen: Màn đơn hàng
+- delivery_screen: Màn giao vận
+- technique_screen: Màn kĩ thuật
+- report_screen: Màn báo cáo
+- setting_screen: Màn cài đặt
+- perform_delivery_screen: Màn thực hiện giao vận
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Service
+- auth_service: Xử lý call API và lưu token sau khi đăng nhập thành công
+- delivery_service: Xử lý call API giao vận
+- technique_service: Xử lý call API d*anh sách đơn hàng kiểm tra kĩ thuật
+### Widget
+- delivery_order_list_widget: Danh sách đơn giao hàng
+- order_detail_widget: Chi tiết đơn hàng

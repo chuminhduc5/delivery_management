@@ -1,85 +1,80 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
-class DeliveryOrderListWidget extends StatefulWidget {
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../blocs/delivery_bloc/delivery_bloc.dart';
+import '../service/delivery_service.dart';
+class DeliveryOrderListWidget extends StatelessWidget {
   const DeliveryOrderListWidget({super.key});
-
-  @override
-  State<DeliveryOrderListWidget> createState() => _DeliveryOrderListWidgetState();
-}
-
-class _DeliveryOrderListWidgetState extends State<DeliveryOrderListWidget> {
-  bool isLoading = true;
-  List items = [];
-
-  @override
-  void initState() {
-    super.initState();
-    fetchData();
-  }
 
   @override
   Widget build(BuildContext context) {
     final double maxWidthScreen = MediaQuery.of(context).size.width;
-
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.grey,
-        title: const Center(child: Text('Todo List')),
-      ),
-      body: Visibility(
-        visible: isLoading,
-        replacement: RefreshIndicator(
-          onRefresh: fetchData,
-          child: ListView.builder(
-            itemCount: items.length,
-            itemBuilder: (context, index) {
-              final item = items[index] as Map;
-              return ListTile(
-                leading: CircleAvatar(child: Text('${index + 1}')),
-                title: Text(item['status']),
-                subtitle: Text(item['description']),
+    return BlocProvider(
+      create: (context) =>
+      DeliveryBloc(DeliveryService())..add(DeliveryFetchRequested()),
+      child: SingleChildScrollView(
+        //scrollDirection: Axis.horizontal,
+        child: BlocBuilder<DeliveryBloc, DeliveryState>(
+          builder: (context, state) {
+            if (state is DeliveryLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is DeliverySuccess) {
+              return RefreshIndicator(
+                onRefresh: () async {
+                  context.read<DeliveryBloc>().add(DeliveryFetchRequested());
+                },
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: DataTable(
+                    headingRowColor: WidgetStateProperty.all(Colors.indigo),
+                    headingTextStyle: const TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w500),
+                    dividerThickness: 0,
+                    columnSpacing: 0,
+                    columns: [
+                      DataColumn(
+                        label: SizedBox(
+                            width: maxWidthScreen * 0.15,
+                            child: const Text('STT')),
+                      ),
+                      DataColumn(
+                        label: SizedBox(
+                            width: maxWidthScreen * 0.4,
+                            child: const Text('Số ĐGH')),
+                      ),
+                      DataColumn(
+                        label: SizedBox(
+                            width: maxWidthScreen * 0.45,
+                            child: const Text('Trạng thái ĐH')),
+                      ),
+                    ],
+                    rows: List<DataRow>.generate(
+                      state.items.length,
+                          (index) {
+                        final item = state.items[index];
+                        return DataRow(
+                          cells: [
+                            DataCell(Text('${index + 1}')),
+                            DataCell(Text(item['id'].toString())),
+                            DataCell(Text(item['status'].toString())),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                ),
               );
-            },
-          ),
-        ),
-        child: const Center(
-          child: CircularProgressIndicator(),
+            } else if (state is DeliveryFailed) {
+              return Center(
+                  child: Text(state.message,
+                      style: const TextStyle(color: Colors.red)));
+            } else {
+              return const Center(
+                  child: Text("Không lấy được dữ liệu",
+                      style: TextStyle(color: Colors.white)));
+            }
+          },
         ),
       ),
     );
-  }
-
-  // Fetch data
-  Future<void> fetchData() async {
-    const url = "http://192.168.68.201:5001/api/v1/TblDelivery/get-all";
-    final uri = Uri.parse(url);
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRlbW8tdHRzIiwiaWQiOiIxNCIsIklwQWRkcmVzcyI6IjEwLjQyLjAuMSIsImV4cCI6MTcyMDM5MzIxNSwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdCIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3QifQ.Q0OlYq853lmN1I0I8rn57h2wXRVnqs90_gxXt_LySBk";
-
-    final response = await http.get(
-      uri,
-      headers: {
-        'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json',
-      },
-    );
-
-    // Show data
-    if (response.statusCode == 200) {
-      final json = jsonDecode(response.body) as Map;
-      final result = json['items'] as List;
-      setState(() {
-        items = result;
-        print(result);
-      });
-    } else {
-      // Handle errors
-      print('Error: ${response.statusCode}');
-    }
-
-    setState(() {
-      isLoading = false;
-    });
   }
 }
