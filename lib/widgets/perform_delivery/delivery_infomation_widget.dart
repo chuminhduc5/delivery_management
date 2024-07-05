@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../../data/delivery_order_data.dart';
 
-class TransportationInfomationWidget extends StatefulWidget {
-  final DeliveryOrderData deliveryOrder;
-  const TransportationInfomationWidget({super.key, required this.deliveryOrder});
+class DeliveryInfomationWidget extends StatefulWidget {
+  final Map<String, dynamic> deliveryOrder;
+  const DeliveryInfomationWidget({super.key, required this.deliveryOrder});
 
   @override
-  State<TransportationInfomationWidget> createState() => _TransportationInfomationWidgetState();
+  State<DeliveryInfomationWidget> createState() => _DeliveryInfomationWidgetState();
 }
 
-class _TransportationInfomationWidgetState extends State<TransportationInfomationWidget> {
+class _DeliveryInfomationWidgetState extends State<DeliveryInfomationWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,7 +37,7 @@ class _TransportationInfomationWidgetState extends State<TransportationInfomatio
                               text: 'Số: ', style: TextStyle(color: Colors.grey,
                               fontSize: 14)),
                           TextSpan(
-                            text: widget.deliveryOrder.deliveryOrderNumber,
+                            text: widget.deliveryOrder['id'].toString(),
                             style: const TextStyle(
                               color: Colors.black,
                               fontSize: 14,

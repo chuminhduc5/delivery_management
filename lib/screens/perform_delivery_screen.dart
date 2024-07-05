@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-
-import '../data/delivery_order_data.dart';
 import '../styles/theme.dart';
 import '../widgets/perform_delivery/billing_infomation_widget.dart';
 import '../widgets/perform_delivery/button_confirm_widget.dart';
-import '../widgets/perform_delivery/delivery_infomation.dart';
+import '../widgets/perform_delivery/delivery_infomation_widget.dart';
 import '../widgets/perform_delivery/delivery_state_widget.dart';
 import '../widgets/perform_delivery/general_infomation_widget.dart';
 
 class PerformDeliveryScreen extends StatefulWidget {
-  final DeliveryOrderData deliveryOrder;
-
+  final Map<String, dynamic> deliveryOrder;
   const PerformDeliveryScreen({super.key, required this.deliveryOrder});
 
   @override
@@ -53,8 +50,8 @@ class _PerformDeliveryScreenState
                 children: [GeneralInfomationWidget(), ButtonConfirmWidget()],
               ),
             ),
-            TransportationInfomationWidget(deliveryOrder: widget.deliveryOrder),
-            const TransportStateWidget(),
+            DeliveryInfomationWidget(deliveryOrder: widget.deliveryOrder),
+            const DeliveryStateWidget(),
             const BillingInfomationWidget(),
           ],
         ),

@@ -1,7 +1,9 @@
+import 'package:delivery_management/screens/perform_delivery_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/delivery_bloc/delivery_bloc.dart';
 import '../service/delivery_service.dart';
+
 class DeliveryOrderListWidget extends StatelessWidget {
   const DeliveryOrderListWidget({super.key});
 
@@ -10,9 +12,8 @@ class DeliveryOrderListWidget extends StatelessWidget {
     final double maxWidthScreen = MediaQuery.of(context).size.width;
     return BlocProvider(
       create: (context) =>
-      DeliveryBloc(DeliveryService())..add(DeliveryFetchRequested()),
+          DeliveryBloc(DeliveryService())..add(DeliveryFetchRequested()),
       child: SingleChildScrollView(
-        //scrollDirection: Axis.horizontal,
         child: BlocBuilder<DeliveryBloc, DeliveryState>(
           builder: (context, state) {
             if (state is DeliveryLoading) {
@@ -49,13 +50,40 @@ class DeliveryOrderListWidget extends StatelessWidget {
                     ],
                     rows: List<DataRow>.generate(
                       state.items.length,
-                          (index) {
+                      (index) {
                         final item = state.items[index];
                         return DataRow(
                           cells: [
-                            DataCell(Text('${index + 1}')),
-                            DataCell(Text(item['id'].toString())),
-                            DataCell(Text(item['status'].toString())),
+                            DataCell(InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              PerformDeliveryScreen(
+                                                  deliveryOrder: item)));
+                                },
+                                child: Text('${index + 1}'))),
+                            DataCell(InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              PerformDeliveryScreen(
+                                                  deliveryOrder: item)));
+                                },
+                                child: Text(item['id'].toString()))),
+                            DataCell(InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              PerformDeliveryScreen(
+                                                  deliveryOrder: item)));
+                                },
+                                child: Text(item['status'].toString()))),
                           ],
                         );
                       },

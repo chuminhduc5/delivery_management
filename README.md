@@ -1,5 +1,5 @@
 # delivery_management
-A new Delivery Management project.
+App quản lý giao vận
 
 ### BLoc
 - sign_in_bloc: Quản lý trạng thái đăng nhập
