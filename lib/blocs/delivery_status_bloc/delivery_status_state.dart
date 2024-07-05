@@ -1,7 +1,13 @@
 part of 'delivery_status_bloc.dart';
 
 @immutable
-abstract class DeliveryStatusState {}
+abstract class DeliveryStatusState extends Equatable{
+  const DeliveryStatusState();
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+}
 
 // Trạng thái khi request
 class DeliveryStatusFetchInitial extends DeliveryStatusState {}
@@ -11,19 +17,33 @@ class DeliveryStatusFetchLoading extends DeliveryStatusState {}
 class DeliveryStatusFetchSuccess extends DeliveryStatusState {
   final List<dynamic> items;
 
-  DeliveryStatusFetchSuccess({required this.items});
+  const DeliveryStatusFetchSuccess({required this.items});
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [items];
 }
 
 class DeliveryStatusFetchFailed extends DeliveryStatusState {
   final String message;
-  DeliveryStatusFetchFailed({required this.message});
+  const DeliveryStatusFetchFailed({required this.message});
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [message];
 }
 
-// // Trạng thái khi update
-class DeliveryStatusUpdateInitial extends DeliveryStatusState {}
+// Trạng thái khi cập nhập trạng thái dữ liệu
+class UpdateDeliveryStatusLoading extends DeliveryStatusState {}
 
-class DeliveryStatusUpdateLoading extends DeliveryStatusState {}
+class UpdateDeliveryStatusSuccess extends DeliveryStatusState {}
 
-class DeliveryStatusUpdateSuccess extends DeliveryStatusState {}
+class UpdateDeliveryStatusFailed extends DeliveryStatusState {
+  final String message;
 
-class DeliveryStatusUpdateFailed extends DeliveryStatusState {}
+  const UpdateDeliveryStatusFailed({required this.message});
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [message];
+}

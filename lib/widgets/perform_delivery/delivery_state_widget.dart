@@ -6,22 +6,49 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DeliveryStateWidget extends StatefulWidget {
-  const DeliveryStateWidget({super.key});
+  final Function(int id, String name) onStatusChanged;
+  final int initialStatusId;
+  final String initialStatusName;
+
+  const DeliveryStateWidget(
+      {super.key,
+      required this.onStatusChanged,
+      required this.initialStatusId,
+      required this.initialStatusName});
 
   @override
   State<DeliveryStateWidget> createState() => _DeliveryStateWidgetState();
 }
 
 class _DeliveryStateWidgetState extends State<DeliveryStateWidget> {
-  bool checkDelivery = false;
-  bool checkArrive = false;
-  bool checkUnsuccessCustomers = false;
-  bool checkUnsuccessHC = false;
-  bool checkDelivered = false;
-  bool checkSuccess = false;
+  // bool checkDelivery = false;
+  // bool checkArrive = false;
+  // bool checkUnsuccessCustomers = false;
+  // bool checkUnsuccessHC = false;
+  // bool checkDelivered = false;
+  // bool checkSuccess = false;
+
+  late int selectedStatusId;
+  late String selectedStatusName;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedStatusId = widget.initialStatusId;
+    selectedStatusName = widget.initialStatusName;
+  }
+
+  void updateSelectedStatus(int id, String name) {
+    setState(() {
+      selectedStatusId = id;
+      selectedStatusName = name;
+      widget.onStatusChanged(id, name);
+    });
+  }
 
   String getNameById(List<dynamic> items, int id) {
-    final item = items.firstWhere((element) => element['id'] == id, orElse: () => null);
+    final item =
+        items.firstWhere((element) => element['id'] == id, orElse: () => null);
     return item != null ? item['name'].toString() : '';
   }
 
@@ -52,56 +79,44 @@ class _DeliveryStateWidgetState extends State<DeliveryStateWidget> {
                         children: [
                           const Text("Tình trạng giao vận"),
                           CheckboxStatusWidget(
-                            value: checkDelivery,
+                            value: selectedStatusId == 3,
                             onChanged: (bool? value) {
-                              setState(() {
-                                checkDelivery = value!;
-                              });
+                              updateSelectedStatus(3, getNameById(items, 3));
                             },
                             title: getNameById(items, 3),
                           ),
                           CheckboxStatusWidget(
-                            value: checkArrive,
+                            value: selectedStatusId == 4,
                             onChanged: (bool? value) {
-                              setState(() {
-                                checkArrive = value!;
-                              });
+                              updateSelectedStatus(4, getNameById(items, 4));
                             },
                             title: getNameById(items, 4),
                           ),
                           CheckboxStatusWidget(
-                            value: checkUnsuccessCustomers,
+                            value: selectedStatusId == 5,
                             onChanged: (bool? value) {
-                              setState(() {
-                                checkUnsuccessCustomers = value!;
-                              });
+                              updateSelectedStatus(5, getNameById(items, 5));
                             },
                             title: getNameById(items, 5),
                           ),
                           CheckboxStatusWidget(
-                            value: checkUnsuccessHC,
+                            value: selectedStatusId == 6,
                             onChanged: (bool? value) {
-                              setState(() {
-                                checkUnsuccessHC = value!;
-                              });
+                              updateSelectedStatus(6, getNameById(items, 6));
                             },
                             title: getNameById(items, 6),
                           ),
                           CheckboxStatusWidget(
-                            value: checkSuccess,
+                            value: selectedStatusId == 8,
                             onChanged: (bool? value) {
-                              setState(() {
-                                checkSuccess = value!;
-                              });
+                              updateSelectedStatus(6, getNameById(items, 6));
                             },
                             title: getNameById(items, 8),
                           ),
                           CheckboxStatusWidget(
-                            value: checkDelivered,
+                            value: selectedStatusId == 7,
                             onChanged: (bool? value) {
-                              setState(() {
-                                checkDelivered = value!;
-                              });
+                              updateSelectedStatus(7, getNameById(items, 7));
                             },
                             title: getNameById(items, 7),
                           ),
@@ -150,4 +165,3 @@ class _DeliveryStateWidgetState extends State<DeliveryStateWidget> {
     );
   }
 }
-
