@@ -21,13 +21,6 @@ class DeliveryStateWidget extends StatefulWidget {
 }
 
 class _DeliveryStateWidgetState extends State<DeliveryStateWidget> {
-  // bool checkDelivery = false;
-  // bool checkArrive = false;
-  // bool checkUnsuccessCustomers = false;
-  // bool checkUnsuccessHC = false;
-  // bool checkDelivered = false;
-  // bool checkSuccess = false;
-
   late int selectedStatusId;
   late String selectedStatusName;
 
@@ -70,8 +63,10 @@ class _DeliveryStateWidgetState extends State<DeliveryStateWidget> {
               child: Container(
                 padding: const EdgeInsets.all(10),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // CheckBox Status
                     Container(
                       width: MediaQuery.of(context).size.width * 5 / 9,
                       child: Column(
@@ -109,7 +104,7 @@ class _DeliveryStateWidgetState extends State<DeliveryStateWidget> {
                           CheckboxStatusWidget(
                             value: selectedStatusId == 8,
                             onChanged: (bool? value) {
-                              updateSelectedStatus(6, getNameById(items, 6));
+                              updateSelectedStatus(8, getNameById(items, 8));
                             },
                             title: getNameById(items, 8),
                           ),
@@ -123,6 +118,7 @@ class _DeliveryStateWidgetState extends State<DeliveryStateWidget> {
                         ],
                       ),
                     ),
+                    // Dropdown item
                     Container(
                       child: const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

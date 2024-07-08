@@ -21,9 +21,6 @@ class _SignInScreenState extends State<SignInScreen> {
   bool obscurePassword = true;
   IconData iconPassword = CupertinoIcons.eye_slash;
 
-  //String? _errorMsg;
-  //bool isSuccess = true;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

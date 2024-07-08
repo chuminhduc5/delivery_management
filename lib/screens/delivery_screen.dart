@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../styles/theme.dart';
 import '../widgets/delivery_order_list_widget.dart';
+import '../widgets/order_detail_widget.dart';
 import '../widgets/search_field_widget.dart';
 
 class DeliveryScreen extends StatefulWidget {
@@ -21,6 +22,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final double maxWidthScreen = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       appBar: AppBar(
@@ -38,7 +40,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
             Container(
               padding: const EdgeInsets.all(10),
               child: SearchFieldWidget(
-                  size: 500,
+                  size: maxWidthScreen * 0.95,
                   hintText: 'Tìm kiếm',
                   suffixIcon: const Icon(Icons.search),
                   onChanged: _updateDeliveryOrder
@@ -46,8 +48,8 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
             ),
             //DeliveryOrderListWidget(searchDeliveryOrder: _searchDeliveryOrder),
             const DeliveryOrderListWidget(),
-            //const SizedBox(height: 50),
-            //const OrderDetailWidget(),
+            const SizedBox(height: 50),
+            const OrderDetailWidget(),
           ],
         ),
       ),

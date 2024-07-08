@@ -19,7 +19,7 @@ class PerformDeliveryScreen extends StatefulWidget {
 
 class _PerformDeliveryScreenState extends State<PerformDeliveryScreen> {
   late Map<String, dynamic> deliveryOrder;
-  int selectedStatusId = -1;
+  int selectedStatusId = 0;
   String selectedStatusName = '';
 
   @override
@@ -65,10 +65,7 @@ class _PerformDeliveryScreenState extends State<PerformDeliveryScreen> {
             );
           }
         },
-        child: AlertDialog(
-          title: Text('Đang cập nhật trạng thái...'),
-          content: CircularProgressIndicator(),
-        ),
+        child: const Center(child: CircularProgressIndicator()),
       ),
     );
   }

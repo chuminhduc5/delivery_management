@@ -19,7 +19,7 @@ class UpdateDeliveryStatus extends DeliveryStatusEvent {
 
   const UpdateDeliveryStatus({
     required this.deliveryId,
-    required this.deliveryStatusId
+    required this.deliveryStatusId,
   });
 
   @override

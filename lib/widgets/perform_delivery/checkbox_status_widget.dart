@@ -22,7 +22,7 @@ class CheckboxStatusWidget extends StatelessWidget {
       visualDensity: const VisualDensity(vertical: -4.0),
       // Thay đổi màu viền
       side: const BorderSide(color: Colors.grey),
-      activeColor: AppColors.bgCheckBox,
+      activeColor: AppColors.bgCheck,
       checkColor: Colors.white,
       value: value,
       onChanged: onChanged,

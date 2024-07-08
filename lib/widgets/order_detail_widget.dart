@@ -6,13 +6,14 @@ class OrderDetailWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double maxWidthScreen = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
+            constraints: BoxConstraints(maxWidth: maxWidthScreen),
             color: Colors.blue,
             padding: const EdgeInsets.all(10),
             child: const Align(
@@ -25,37 +26,54 @@ class OrderDetailWidget extends StatelessWidget {
           ),
           DataTable(
             headingRowColor: WidgetStateProperty.all(Colors.indigo),
-            headingTextStyle: const TextStyle(color: Colors.white, fontWeight: FontWeight.w500),
+            headingTextStyle: const TextStyle(
+                color: Colors.white, fontWeight: FontWeight.w500),
             dividerThickness: 0,
             horizontalMargin: 10,
             columnSpacing: 10,
             dataRowMaxHeight: 80,
-            columns: const [
+            columns: [
               DataColumn(
-                label: Text('Mã SP'),
+                label: SizedBox(
+                    width: maxWidthScreen * 0.25, child: const Text('Mã SP')),
               ),
               DataColumn(
-                label: Text('Tên SP'),
+                label: SizedBox(
+                    width: maxWidthScreen * 0.3, child: const Text('Tên SP')),
               ),
               DataColumn(
-                label: Text('ĐVT'),
+                label: SizedBox(
+                    width: maxWidthScreen * 0.1, child: const Text('ĐVT')),
               ),
               DataColumn(
-                label: Text('SL'),
+                label: SizedBox(
+                    width: maxWidthScreen * 0.1, child: const Text('SL')),
               ),
               DataColumn(
-                label: Text('Kho suất'),
+                label: SizedBox(
+                    width: maxWidthScreen * 0.25,
+                    child: const Text('Kho suất')),
               ),
             ],
             rows: List<DataRow>.generate(
               orderDetailList.length,
-                  (index) => DataRow(
+              (index) => DataRow(
                 cells: [
-                  DataCell(Text(orderDetailList[index].productCode)),
-                  DataCell(SizedBox(width: 80, child: Text(orderDetailList[index].productName))),
-                  DataCell(Text(orderDetailList[index].unit)),
-                  DataCell(Text(orderDetailList[index].quantity)),
-                  DataCell(Text(orderDetailList[index].exportWarehouse)),
+                  DataCell(SizedBox(
+                      width: maxWidthScreen * 0.25,
+                      child: Text(orderDetailList[index].productCode))),
+                  DataCell(SizedBox(
+                      width: maxWidthScreen * 0.3,
+                      child: Text(orderDetailList[index].productName))),
+                  DataCell(SizedBox(
+                      width: maxWidthScreen * 0.1,
+                      child: Text(orderDetailList[index].unit))),
+                  DataCell(SizedBox(
+                      width: maxWidthScreen * 0.1,
+                      child: Text(orderDetailList[index].quantity))),
+                  DataCell(SizedBox(
+                      width: maxWidthScreen * 0.25,
+                      child: Text(orderDetailList[index].exportWarehouse))),
                 ],
               ),
             ),

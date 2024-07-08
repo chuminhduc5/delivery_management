@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:delivery_management/const/api_delivery.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,7 +13,7 @@ class DeliveryService {
     }
 
     // Call API fetch Data
-    final url = 'http://192.168.68.201:5001/api/v1/TblDelivery/get-list?Take=5';
+    const url = ApiDelivery.GET_LIST_DELIVERY;
     final uri = Uri.parse(url);
     final response = await http.get(
         uri,

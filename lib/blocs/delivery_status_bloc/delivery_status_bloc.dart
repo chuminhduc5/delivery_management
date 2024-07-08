@@ -34,7 +34,9 @@ class DeliveryStatusBloc extends Bloc<DeliveryStatusEvent, DeliveryStatusState> 
         event.deliveryId,
         event.deliveryStatusId,
       );
-      emit(UpdateDeliveryStatusSuccess());
+      await Future.delayed(const Duration(seconds: 1), (){
+        emit(UpdateDeliveryStatusSuccess());
+      });
     } catch (e){
       emit (UpdateDeliveryStatusFailed(message: e.toString()));
     }

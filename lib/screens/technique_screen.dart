@@ -23,6 +23,7 @@ class _TechniqueScreenState extends State<TechniqueScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final double maxWidthScreen = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       appBar: AppBar(
@@ -45,9 +46,9 @@ class _TechniqueScreenState extends State<TechniqueScreen> {
                   const SizedBox(
                     width: 10,
                   ),
-                  const BranchFilterWidget(),
+                  BranchFilterWidget(sizeWidth: maxWidthScreen * 0.4),
                   SearchFieldWidget(
-                      size: 150,
+                      size: maxWidthScreen * 0.4,
                       hintText: 'Tìm kiếm',
                       suffixIcon: IconButton(
                           onPressed: (){},

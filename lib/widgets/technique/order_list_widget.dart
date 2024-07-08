@@ -13,7 +13,6 @@ class OrderListWidget extends StatelessWidget {
       create: (context) =>
           TechniqueBloc(TechniqueService())..add(TechniqueFetchRequested()),
       child: SingleChildScrollView(
-        //scrollDirection: Axis.horizontal,
         child: BlocBuilder<TechniqueBloc, TechniqueState>(
           builder: (context, state) {
             if (state is TechniqueLoading) {
@@ -31,21 +30,21 @@ class OrderListWidget extends StatelessWidget {
                     dividerThickness: 0,
                     horizontalMargin: 15, // Bỏ margin mặc định
                     columnSpacing: 15, // Dặt lại khoảng cách giứa các cột
-                    columns: const [
+                    columns: [
                       DataColumn(
-                        label: SizedBox(width: 30, child: Text('STT')),
+                        label: SizedBox(width: maxWidthScreen * 0.1, child: const Text('STT')),
                       ),
                       DataColumn(
-                        label: SizedBox(width: 150, child: Text('Số đơn hàng')),
+                        label: SizedBox(width: maxWidthScreen * 0.3, child: const Text('Số đơn hàng')),
                       ),
                       DataColumn(
-                        label: SizedBox(width: 100, child: Text('Ngày DH')),
+                        label: SizedBox(width: maxWidthScreen * 0.2, child: const Text('Ngày DH')),
                       ),
                       DataColumn(
-                        label: SizedBox(width: 100, child: Text('Chi nhánh')),
+                        label: SizedBox(width: maxWidthScreen * 0.2, child: const Text('Chi nhánh')),
                       ),
                       DataColumn(
-                        label: SizedBox(width: 100, child: Text('Trạng thái')),
+                        label: SizedBox(width: maxWidthScreen * 0.2, child: const Text('Trạng thái')),
                       ),
                     ],
                     rows: List<DataRow>.generate(

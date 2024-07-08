@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:delivery_management/const/api_delivery.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,7 +15,7 @@ class DeliveryStatusService {
     }
 
     // Call API fetch Data
-    final url = 'http://apis-dev.hacom.local/api-mdm/api/v1/TblDmDeliveryStatus/get-all';
+    const url = ApiDelivery.GET_ALL_DELIVERY_STATUS;
     final uri = Uri.parse(url);
     final response = await http.get(
         uri,
@@ -43,7 +44,7 @@ class DeliveryStatusService {
     }
 
     // Call API
-    final url = 'http://192.168.68.201:5001/api/v1/TblDelivery/update-status';
+    const url = ApiDelivery.POST_UPDATE_STATUS;
     final uri = Uri.parse(url);
     final response = await http.post(
         uri,

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 class BranchFilterWidget extends StatefulWidget {
   //final ValueChanged<String> onChanged;
-  const BranchFilterWidget({super.key});
+  final double sizeWidth;
+  const BranchFilterWidget({super.key, required this.sizeWidth});
 
   @override
   State<BranchFilterWidget> createState() => _BranchFilterWidgetState();
@@ -22,7 +23,7 @@ class _BranchFilterWidgetState extends State<BranchFilterWidget> {
   Widget build(BuildContext context) {
     return DropdownMenu<String>(
       initialSelection: _selectedItem,
-      width: 150,
+      width: widget.sizeWidth,
 
       onSelected: (String? value) {
         setState(() {

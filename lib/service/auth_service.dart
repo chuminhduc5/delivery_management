@@ -2,11 +2,20 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../const/api_delivery.dart';
+
 class AuthService {
   Future<String> authenticateUser(String username, String password) async {
-    final url = 'http://apis-dev.hacom.local/api-master/api/v1/Auth/login';
+    print("--------------start---------- " );
+    const url = ApiDelivery.POST_AUTH_LOGIN;
     final uri = Uri.parse(url);
-    final response = await http.post(uri,
+    print("--------------URL---------- ${url} ---------- $uri" );
+    print(jsonEncode(<String, dynamic>{
+      'username': username,
+      'password': password,
+      'remember': true,
+    }))
+;    final response = await http.post(uri,
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -15,12 +24,16 @@ class AuthService {
           'password': password,
           'remember': true,
         }));
+
+
+    print("--------------responseData---------- ${response}" );
     if (response.statusCode == 200) {
+      print("-----------------success------------------");
       final responseBody = jsonDecode(response.body);
-      return responseBody['data']['jwt']; // Thay đổi tùy thuộc vào cấu trúc JSON
+      return responseBody['data']['jwt'];
     } else {
-      print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}'); // Log response body để xem chi tiết
+      print('---------------Response status---------------------: ${response.statusCode}');
+      print('----------------------Response body-------------------: ${response.body}'); // Log response body để xem chi tiết
       throw Exception('Failed to login');
     }
   }
