@@ -3,9 +3,7 @@ import 'package:delivery_management/screens/home_screen.dart';
 import 'package:delivery_management/screens/report_screen.dart';
 import 'package:delivery_management/screens/setting_screen.dart';
 import 'package:delivery_management/screens/technique_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'screens/order_screen.dart';
 
 

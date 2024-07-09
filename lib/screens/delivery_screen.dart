@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../styles/theme.dart';
 import '../widgets/delivery_order_list_widget.dart';
-import '../widgets/order_detail_widget.dart';
 import '../widgets/search_field_widget.dart';
 
 class DeliveryScreen extends StatefulWidget {
@@ -49,7 +48,6 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
             //DeliveryOrderListWidget(searchDeliveryOrder: _searchDeliveryOrder),
             const DeliveryOrderListWidget(),
             const SizedBox(height: 50),
-            const OrderDetailWidget(),
           ],
         ),
       ),

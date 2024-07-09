@@ -127,9 +127,9 @@ class _SignInScreenState extends State<SignInScreen> {
                                           .read<SignInBloc>()
                                           .add(AuthSignInRequested(
                                             username:
-                                                usernameController.text.trim(),
+                                                usernameController.text,
                                             password:
-                                                passwordController.text.trim(),
+                                                passwordController.text,
                                           ));
                                     }
                                   },

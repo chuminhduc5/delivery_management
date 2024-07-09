@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../data/delivery_order_data.dart';
-
 class DeliveryInfomationWidget extends StatefulWidget {
   final Map<String, dynamic> deliveryOrder;
   const DeliveryInfomationWidget({super.key, required this.deliveryOrder});
@@ -22,7 +20,7 @@ class _DeliveryInfomationWidgetState extends State<DeliveryInfomationWidget> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              SizedBox(
                 width: MediaQuery
                     .of(context)
                     .size
@@ -87,7 +85,7 @@ class _DeliveryInfomationWidgetState extends State<DeliveryInfomationWidget> {
             ],
           ),
           const SizedBox(height: 5,),
-          Container(
+          SizedBox(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

@@ -40,16 +40,17 @@ class _PerformDeliveryScreenState extends State<PerformDeliveryScreen> {
   void onConfirm() {
     // Gửi sự kiện cập nhật trạng thái
     context.read<DeliveryStatusBloc>().add(
-      UpdateDeliveryStatus(
-        deliveryId: deliveryOrder['id'],
-        deliveryStatusId: selectedStatusId,
-      ),
-    );
+          UpdateDeliveryStatus(
+            deliveryId: deliveryOrder['id'],
+            deliveryStatusId: selectedStatusId,
+          ),
+        );
 
     // Hiển thị một hộp thoại để thông báo cho người dùng
     showDialog(
       context: context,
-      builder: (context) => BlocListener<DeliveryStatusBloc, DeliveryStatusState>(
+      builder: (context) =>
+          BlocListener<DeliveryStatusBloc, DeliveryStatusState>(
         listener: (context, state) {
           if (state is UpdateDeliveryStatusSuccess) {
             Navigator.pop(context); // Đóng hộp thoại thông báo
@@ -61,7 +62,9 @@ class _PerformDeliveryScreenState extends State<PerformDeliveryScreen> {
           } else if (state is UpdateDeliveryStatusFailed) {
             Navigator.pop(context); // Đóng hộp thoại thông báo
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Cập nhật trạng thái thất bại: ${state.message}')),
+              SnackBar(
+                  content:
+                      Text('Cập nhật trạng thái thất bại: ${state.message}')),
             );
           }
         },
@@ -72,6 +75,7 @@ class _PerformDeliveryScreenState extends State<PerformDeliveryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final double maxWidthScreen = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       appBar: AppBar(
@@ -97,11 +101,10 @@ class _PerformDeliveryScreenState extends State<PerformDeliveryScreen> {
                   ),
                 ),
               ),
-              child: Row(
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const GeneralInfomationWidget(),
-                  ButtonConfirmWidget(onPressed: onConfirm)
+                  GeneralInfomationWidget(),
                 ],
               ),
             ),
@@ -112,6 +115,11 @@ class _PerformDeliveryScreenState extends State<PerformDeliveryScreen> {
               initialStatusName: selectedStatusName,
             ),
             const BillingInfomationWidget(),
+            ButtonConfirmWidget(
+                sizeWidth: maxWidthScreen * 0.85,
+                onPressed: onConfirm
+            ),
+            const SizedBox(height: 20,),
           ],
         ),
       ),

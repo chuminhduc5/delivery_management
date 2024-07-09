@@ -9,7 +9,7 @@ class AuthService {
     print("--------------start---------- " );
     const url = ApiDelivery.POST_AUTH_LOGIN;
     final uri = Uri.parse(url);
-    print("--------------URL---------- ${url} ---------- $uri" );
+    print("--------------URL---------- $url ---------- $uri" );
     print(jsonEncode(<String, dynamic>{
       'username': username,
       'password': password,
@@ -26,7 +26,7 @@ class AuthService {
         }));
 
 
-    print("--------------responseData---------- ${response}" );
+    print("--------------responseData---------- $response" );
     if (response.statusCode == 200) {
       print("-----------------success------------------");
       final responseBody = jsonDecode(response.body);
