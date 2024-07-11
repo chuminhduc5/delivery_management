@@ -84,7 +84,6 @@ class _DeliveryOrderListWidgetState extends State<DeliveryOrderListWidget> {
                                       builder: (context) => PerformDeliveryScreen(deliveryOrder: item),
                                     ),
                                   );
-
                                   if (updatedOrder != null) {
                                     setState(() {
                                       state.items[index] = updatedOrder;

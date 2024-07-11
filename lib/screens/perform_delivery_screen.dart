@@ -81,47 +81,63 @@ class _PerformDeliveryScreenState extends State<PerformDeliveryScreen> {
       appBar: AppBar(
         backgroundColor: AppColors.bgAppbar,
         iconTheme: const IconThemeData(color: Colors.white),
-        title: const Text('Thực hiện GV',
-            style: TextStyle(
-                fontSize: 22,
-                color: Colors.white,
-                fontWeight: FontWeight.w500)),
+        title: const Center(
+          child: Text('Thực hiện giao vận',
+              style: TextStyle(
+                  fontSize: 22,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500)),
+        ),
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.qr_code_2))
+        ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-              decoration: BoxDecoration(
-                color: Colors.grey[100],
-                border: const Border(
-                  bottom: BorderSide(
-                    color: Colors.grey,
-                    width: 1,
+      resizeToAvoidBottomInset: false,
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Column(
+                children: <Widget>[
+                  DeliveryInfomationWidget(deliveryOrder: widget.deliveryOrder),
+                  DeliveryStateWidget(
+                    onStatusChanged: onStatusChanged,
+                    initialStatusId: selectedStatusId,
+                    initialStatusName: selectedStatusName,
                   ),
-                ),
-              ),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GeneralInfomationWidget(),
+                  const BillingInfomationWidget(),
+                  // const TabBar(
+                  //   tabs: [
+                  //     Tab(
+                  //       text: 'Thông tin chung',
+                  //     ),
+                  //     Tab(
+                  //       text: 'Thông tin thanh toán',
+                  //     )
+                  //   ],
+                  //   labelColor: AppColors.bgAppbar,
+                  //   indicatorColor: AppColors.bgAppbar,
+                  //   dividerColor: AppColors.bgColor,
+                  // ),
+                  // Expanded(
+                  //     child: TabBarView(children: [
+                  //   InfomationWidget(deliveryOrder: widget.deliveryOrder),
+                  //   const BillingInfoScreen(),
+                  // ])),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: ButtonConfirmWidget(
+                          onPressed: onConfirm),
+                    ),
+                  ),
                 ],
               ),
             ),
-            DeliveryInfomationWidget(deliveryOrder: widget.deliveryOrder),
-            DeliveryStateWidget(
-              onStatusChanged: onStatusChanged,
-              initialStatusId: selectedStatusId,
-              initialStatusName: selectedStatusName,
-            ),
-            const BillingInfomationWidget(),
-            ButtonConfirmWidget(
-                sizeWidth: maxWidthScreen * 0.85,
-                onPressed: onConfirm
-            ),
-            const SizedBox(height: 20,),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

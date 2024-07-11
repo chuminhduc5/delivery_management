@@ -5,6 +5,8 @@ import 'package:delivery_management/widgets/perform_delivery/select_returned_goo
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../styles/theme.dart';
+
 class DeliveryStateWidget extends StatefulWidget {
   final Function(int id, String name) onStatusChanged;
   final int initialStatusId;
@@ -61,59 +63,105 @@ class _DeliveryStateWidgetState extends State<DeliveryStateWidget> {
                 context.read<DeliveryStatusBloc>().add(DeliveryStatusFetch());
               },
               child: Container(
-                padding: const EdgeInsets.all(10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // CheckBox Status
                     Container(
-                      width: MediaQuery.of(context).size.width * 5 / 9,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text("Tình trạng giao vận"),
-                          CheckboxStatusWidget(
-                            value: selectedStatusId == 3,
-                            onChanged: (bool? value) {
-                              updateSelectedStatus(3, getNameById(items, 3));
-                            },
-                            title: getNameById(items, 3),
+                          const Text("Tình trạng giao vận", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: AppColors.bgAppbar)),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                            margin: const EdgeInsets.only(bottom: 10),
+                            decoration: BoxDecoration(
+                              color: Colors.green[100],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: CheckboxStatusWidget(
+                              value: selectedStatusId == 3,
+                              onChanged: (bool? value) {
+                                updateSelectedStatus(3, getNameById(items, 3));
+                              },
+                              title: getNameById(items, 3),
+                            ),
                           ),
-                          CheckboxStatusWidget(
-                            value: selectedStatusId == 4,
-                            onChanged: (bool? value) {
-                              updateSelectedStatus(4, getNameById(items, 4));
-                            },
-                            title: getNameById(items, 4),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                            margin: const EdgeInsets.only(bottom: 10),
+                            decoration: BoxDecoration(
+                              color: Colors.green[100],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: CheckboxStatusWidget(
+                              value: selectedStatusId == 4,
+                              onChanged: (bool? value) {
+                                updateSelectedStatus(4, getNameById(items, 4));
+                              },
+                              title: getNameById(items, 4),
+                            ),
                           ),
-                          CheckboxStatusWidget(
-                            value: selectedStatusId == 5,
-                            onChanged: (bool? value) {
-                              updateSelectedStatus(5, getNameById(items, 5));
-                            },
-                            title: getNameById(items, 5),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                            margin: const EdgeInsets.only(bottom: 10),
+                            decoration: BoxDecoration(
+                              color: Colors.green[100],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: CheckboxStatusWidget(
+                              value: selectedStatusId == 5,
+                              onChanged: (bool? value) {
+                                updateSelectedStatus(5, getNameById(items, 5));
+                              },
+                              title: getNameById(items, 5),
+                            ),
                           ),
-                          CheckboxStatusWidget(
-                            value: selectedStatusId == 6,
-                            onChanged: (bool? value) {
-                              updateSelectedStatus(6, getNameById(items, 6));
-                            },
-                            title: getNameById(items, 6),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                            margin: const EdgeInsets.only(bottom: 10),
+                            decoration: BoxDecoration(
+                              color: Colors.green[100],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: CheckboxStatusWidget(
+                              value: selectedStatusId == 6,
+                              onChanged: (bool? value) {
+                                updateSelectedStatus(6, getNameById(items, 6));
+                              },
+                              title: getNameById(items, 6),
+                            ),
                           ),
-                          CheckboxStatusWidget(
-                            value: selectedStatusId == 8,
-                            onChanged: (bool? value) {
-                              updateSelectedStatus(8, getNameById(items, 8));
-                            },
-                            title: getNameById(items, 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                            margin: const EdgeInsets.only(bottom: 10),
+                            decoration: BoxDecoration(
+                              color: Colors.green[100],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: CheckboxStatusWidget(
+                              value: selectedStatusId == 8,
+                              onChanged: (bool? value) {
+                                updateSelectedStatus(8, getNameById(items, 8));
+                              },
+                              title: getNameById(items, 8),
+                            ),
                           ),
-                          CheckboxStatusWidget(
-                            value: selectedStatusId == 7,
-                            onChanged: (bool? value) {
-                              updateSelectedStatus(7, getNameById(items, 7));
-                            },
-                            title: getNameById(items, 7),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                            margin: const EdgeInsets.only(bottom: 10),
+                            decoration: BoxDecoration(
+                              color: Colors.green[100],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: CheckboxStatusWidget(
+                              value: selectedStatusId == 7,
+                              onChanged: (bool? value) {
+                                updateSelectedStatus(7, getNameById(items, 7));
+                              },
+                              title: getNameById(items, 7),
+                            ),
                           ),
                         ],
                       ),
@@ -123,7 +171,7 @@ class _DeliveryStateWidgetState extends State<DeliveryStateWidget> {
                       child: const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Hàng trả lại:'),
+                          Text('Hàng trả lại:', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: AppColors.bgAppbar),),
                           SizedBox(
                             height: 5,
                           ),
@@ -131,7 +179,7 @@ class _DeliveryStateWidgetState extends State<DeliveryStateWidget> {
                           SizedBox(
                             height: 10,
                           ),
-                          Text('Lý do trả lại:'),
+                          Text('Lý do trả lại:', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: AppColors.bgAppbar),),
                           SizedBox(
                             height: 5,
                           ),

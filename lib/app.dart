@@ -3,6 +3,7 @@ import 'package:delivery_management/screens/home_screen.dart';
 import 'package:delivery_management/screens/report_screen.dart';
 import 'package:delivery_management/screens/setting_screen.dart';
 import 'package:delivery_management/screens/technique_screen.dart';
+import 'package:delivery_management/styles/theme.dart';
 import 'package:flutter/material.dart';
 import 'screens/order_screen.dart';
 
@@ -54,7 +55,7 @@ class _AppState extends State<App> {
         currentIndex: _selectedIndex,
         onTap: _navigateBottomBar,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.black,
+        selectedItemColor: AppColors.bgAppbar,
         backgroundColor: Colors.white,
         selectedFontSize: 12,
         unselectedFontSize: 10,

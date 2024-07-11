@@ -17,17 +17,17 @@ class CheckboxStatusWidget extends StatelessWidget {
     return CheckboxListTile(
       contentPadding: EdgeInsets.zero,
       // đẩy ô checkbox lên trước
-      controlAffinity: ListTileControlAffinity.leading,
+      //controlAffinity: ListTileControlAffinity.leading,
       // Tùy chỉnh chiều cao và chiều rộng
       visualDensity: const VisualDensity(vertical: -4.0),
       // Thay đổi màu viền
       side: const BorderSide(color: Colors.grey),
-      activeColor: AppColors.bgCheck,
-      checkColor: Colors.white,
+      activeColor: AppColors.activeColor,
+      checkColor: AppColors.checkColor,
       value: value,
       onChanged: onChanged,
       title: Transform.translate(
-          offset: const Offset(-15, 0),
+          offset: const Offset(0, 0),
           child: Text(
             title,
             style: const TextStyle(fontSize: 14),

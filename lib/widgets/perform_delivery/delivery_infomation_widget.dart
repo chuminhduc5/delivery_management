@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/theme.dart';
+
 class DeliveryInfomationWidget extends StatefulWidget {
   final Map<String, dynamic> deliveryOrder;
   const DeliveryInfomationWidget({super.key, required this.deliveryOrder});
@@ -11,123 +13,81 @@ class DeliveryInfomationWidget extends StatefulWidget {
 class _DeliveryInfomationWidgetState extends State<DeliveryInfomationWidget> {
   @override
   Widget build(BuildContext context) {
+    final double maxWidthScreen = MediaQuery.of(context).size.width - 40; // Adjust based on your needs
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      decoration: BoxDecoration(
+        border: Border.all(color: AppColors.bgInfoDeiivery),
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.green[50],
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Table(
+            columnWidths: const {
+              0: IntrinsicColumnWidth(), // Adjusts the width of the first column to fit its contents
+            },
             children: [
-              SizedBox(
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width * 1 / 2,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          const TextSpan(
-                              text: 'Số: ', style: TextStyle(color: Colors.grey,
-                              fontSize: 14)),
-                          TextSpan(
-                            text: widget.deliveryOrder['id'].toString(),
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('KH: ',
-                          style: TextStyle(fontSize: 14, color: Colors.grey),),
-                        Expanded(
-                          child: Text(
-                            'Khách lẻ thanh toán ngay - giao vận chi nhánh Hai Bà Trưng',
-                            style: TextStyle(fontSize: 14, color: Colors.black),),
-                        )
-                      ],
-                    )
-                  ],
-                ),
+              TableRow(
+                children: [
+                  const Text('Số:', style: TextStyle(fontWeight: FontWeight.w500),),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5), // Khoảng cách giữa hai cột
+                    child: Text(widget.deliveryOrder['id'].toString()),
+                  ),
+                ],
               ),
-              Expanded(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-
-                      children: [
-                        Text('Ngày:',
-                            style: TextStyle(color: Colors.grey, fontSize: 14)),
-                        Icon(Icons.phone),
-                      ],
+              TableRow(
+                children: [
+                  const Text('Khách hàng:', style: TextStyle(fontWeight: FontWeight.w500),),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: Text(
+                      widget.deliveryOrder['nameCustomer'],
+                      overflow: TextOverflow.visible,
+                      softWrap: true,
                     ),
-                    IconButton(onPressed: () {},
-                      icon: const Icon(Icons.qr_code),
-                      iconSize: 50,
-                      padding: EdgeInsets.zero,)
-                  ],
-                ),
-              )
+                  ),
+                ],
+              ),
+              TableRow(
+                children: [
+                  const Text('Địa chỉ giao hàng:', style: TextStyle(fontWeight: FontWeight.w500),),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: Text(
+                      widget.deliveryOrder['toAddress'],
+                      overflow: TextOverflow.visible,
+                      softWrap: true,
+                    ),
+                  ),
+                ],
+              ),
+              const TableRow(
+                children: [
+                  Text('Nhân viên bán hàng:', style: TextStyle(fontWeight: FontWeight.w500),),
+                  Padding(
+                    padding: EdgeInsets.only(left: 5),
+                    child: Text(
+                      'Ngô Thị Bích Hạnh-1324',
+                      overflow: TextOverflow.visible,
+                      softWrap: true,
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
-          const SizedBox(height: 5,),
-          SizedBox(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Địa chỉ giao hàng: ',
-                      style: TextStyle(fontSize: 14, color: Colors.grey),),
-                    Expanded(
-                      child: Text(
-                        'Halu, Phường Cống Vị, Quận Ba Đình, Thành phố Hà Nộ',
-                        style: TextStyle(fontSize: 14, color: Colors.black),),
-                    )
-                  ],
-                ),
-                RichText(
-                  text: const TextSpan(
-                    children: [
-                      TextSpan(
-                          text: 'NVBH: ',
-                          style: TextStyle(color: Colors.grey)),
-                      TextSpan(
-                        text: 'Ngô Thị Bích Hạnh-1324',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ),
-                RichText(
-                  text: const TextSpan(
-                    children: [
-                      TextSpan(
-                          text: 'Ghi chú đơn hàng: ',
-                          style: TextStyle(color: Colors.grey)),
-                      TextSpan(
-                        text: '',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+          const SizedBox(height: 10), // Optional spacing between the table and the note field
+          const Text('Ghi chú đơn hàng:', style: TextStyle(fontWeight: FontWeight.w500)),
+          const SizedBox(height: 5),
+          Container(
+            width: maxWidthScreen,
+            height: 80,
+            decoration: BoxDecoration(
+              border: Border.all(color: AppColors.bgAppbar),
+              borderRadius: BorderRadius.circular(8),
             ),
           ),
         ],

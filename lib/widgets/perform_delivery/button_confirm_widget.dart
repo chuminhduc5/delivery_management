@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 
+import '../../styles/theme.dart';
+
 class ButtonConfirmWidget extends StatelessWidget {
   final Function() onPressed;
-  final double sizeWidth;
-  const ButtonConfirmWidget({super.key, required this.onPressed, required this.sizeWidth});
+  const ButtonConfirmWidget({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: sizeWidth,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white,
-          backgroundColor: Colors.indigo,
-          padding: const EdgeInsets.all(20),
+          foregroundColor: AppColors.textWhile,
+          backgroundColor: AppColors.bgButton,
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(10),
           ),
         ),
         child: const Text(
