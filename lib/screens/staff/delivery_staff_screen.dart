@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../styles/theme.dart';
 import '../../widgets/delivery/bill_of_landing_info_widget.dart';
-import '../../widgets/search_field_widget.dart';
+import '../../widgets/common_widget/search_field_widget.dart';
 
 class DeliveryStaffScreen extends StatefulWidget {
   const DeliveryStaffScreen({super.key});
@@ -54,7 +54,7 @@ class _DeliveryStaffScreenState extends State<DeliveryStaffScreen> {
                   SearchFieldWidget(
                       size: 130,
                       hintText: 'Tìm kiếm',
-                      suffixIcon: const Icon(Icons.search),
+                      //suffixIcon: const Icon(Icons.search),
                       onChanged: _updateDeliveryOrder
                   )
                 ],

@@ -8,48 +8,50 @@ class DeliveryCardWidget extends StatelessWidget {
   final String address;
 
   const DeliveryCardWidget(
-      {super.key,
-      required this.id,
-      required this.status,
-      required this.statusUpdateTime,
-      required this.address});
+       this.id,
+       this.status,
+       this.statusUpdateTime,
+       this.address, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: AppColors.bgInfoDeiivery,
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10, top: 5),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.grey[50],
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              // padding: EdgeInsets.all(5),
-              // decoration: BoxDecoration(
-              //   border: Border(
-              //     left: BorderSide(
-              //       width: 2,
-              //       color: AppColors.bgAppbar
-              //     )
-              //   )
-              // ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        status,
-                        style: const TextStyle(
-                            color: Colors.red,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.red[50],
+                        ),
+
+                        child: Text(
+                          status,
+                          style: const TextStyle(
+                              color: AppColors.statusRed,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600),
+                        ),
                       ),
                       Text(
                         statusUpdateTime,
-                        style: TextStyle(fontSize: 13, color: Colors.grey),
+                        style: const TextStyle(fontSize: 13, color: AppColors.textBlack),
                       ),
                     ],
                   ),
@@ -66,8 +68,7 @@ class DeliveryCardWidget extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                         )),
                     TextSpan(
-                        text:
-                            address,
+                        text: address,
                         style: const TextStyle(
                           fontSize: 14,
                           color: Colors.black,
@@ -79,32 +80,37 @@ class DeliveryCardWidget extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            RichText(
-                text: TextSpan(children: [
-              const TextSpan(
-                  text: 'Mã ĐGH: ',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w500,
-                  )),
-              TextSpan(
-                  text: id,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    color: Colors.black,
-                  ))
-            ])),
-            const Align(
-              alignment: Alignment.bottomRight,
-              child: Text(
-                'Xem chi tiết',
-                style: TextStyle(
-                    color: AppColors.bgAppbar,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14),
-              ),
-            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                RichText(
+                    text: TextSpan(children: [
+                  const TextSpan(
+                      text: 'Mã ĐGH: ',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
+                      )),
+                  TextSpan(
+                      text: id,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.black,
+                      ))
+                ])),
+                const Align(
+                  alignment: Alignment.bottomRight,
+                  child: Text(
+                    'Xem chi tiết',
+                    style: TextStyle(
+                        color: AppColors.bgAppbar,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),

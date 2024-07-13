@@ -33,7 +33,7 @@ class TextFieldAuthWidget extends StatelessWidget {
       textInputAction: TextInputAction.next,
       autovalidateMode: autovalidateMode,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.all(18),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         suffixIcon: suffixIcon,
         prefixIcon: prefixIcon,
         enabledBorder: OutlineInputBorder(
@@ -42,7 +42,7 @@ class TextFieldAuthWidget extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: Colors.black, width: 1),
+          borderSide: const BorderSide(color: Colors.blue, width: 1),
 
         ),
         //fillColor: Colors.grey.shade200,

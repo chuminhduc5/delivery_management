@@ -1,8 +1,8 @@
-import 'package:delivery_management/screens/perform_delivery_screen.dart';
+import 'package:delivery_management/screens/secondary_screen/perform_delivery_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../blocs/delivery_bloc/delivery_bloc.dart';
-import '../service/delivery_service.dart';
+import '../../blocs/delivery_bloc/delivery_bloc.dart';
+import '../../service/delivery_service.dart';
 
 class DeliveryOrderListWidget extends StatefulWidget {
   const DeliveryOrderListWidget({super.key});

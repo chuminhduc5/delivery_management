@@ -56,7 +56,7 @@ class _SelectReturnedGoodWidgetState extends State<SelectReturnedGoodWidget> {
         },
         buttonStyleData: ButtonStyleData(
           height: 45,
-          width: maxWidthScreen * 0.9,
+          width: maxWidthScreen,
           padding: const EdgeInsets.only(left: 14, right: 14),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
@@ -78,16 +78,19 @@ class _SelectReturnedGoodWidgetState extends State<SelectReturnedGoodWidget> {
           iconSize: 14,
         ),
         dropdownStyleData: DropdownStyleData(
-          width: maxWidthScreen * 0.7,
-          //padding: EdgeInsets.all(5),
+          width: maxWidthScreen,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: Colors.white,
           ),
           offset: const Offset(0, -10),
+          scrollbarTheme: ScrollbarThemeData(
+            radius: const Radius.circular(40),
+            thickness: WidgetStateProperty.all(6),
+            thumbVisibility: WidgetStateProperty.all(true),
+          ),
         ),
         menuItemStyleData: const MenuItemStyleData(
-          //padding: EdgeInsets.all(0),
           height: 30,
         ),
       ),

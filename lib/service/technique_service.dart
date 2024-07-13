@@ -1,8 +1,8 @@
 import 'dart:convert';
-
-import 'package:delivery_management/const/api_delivery.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../apis/api_endpoint.dart';
 
 class TechniqueService {
   Future<List<dynamic>> fetchTechnique() async {
@@ -13,7 +13,7 @@ class TechniqueService {
       throw Exception('No token found');
     }
 
-    const url = ApiDelivery.GET_LIST_TECHNIQUE;
+    const url = ApiEndpoint.GET_LIST_TECHNIQUE;
     final uri = Uri.parse(url);
     final response = await http.get(
         uri,

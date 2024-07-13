@@ -63,7 +63,8 @@ class _DeliveryStateWidgetState extends State<DeliveryStateWidget> {
                 context.read<DeliveryStatusBloc>().add(DeliveryStatusFetch());
               },
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -72,9 +73,15 @@ class _DeliveryStateWidgetState extends State<DeliveryStateWidget> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text("Tình trạng giao vận", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: AppColors.bgAppbar)),
+                          const Text("Tình trạng giao vận",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColors.bgAppbar)),
+                          const SizedBox(height: 5),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 3),
                             margin: const EdgeInsets.only(bottom: 10),
                             decoration: BoxDecoration(
                               color: Colors.green[100],
@@ -89,7 +96,8 @@ class _DeliveryStateWidgetState extends State<DeliveryStateWidget> {
                             ),
                           ),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 3),
                             margin: const EdgeInsets.only(bottom: 10),
                             decoration: BoxDecoration(
                               color: Colors.green[100],
@@ -104,7 +112,8 @@ class _DeliveryStateWidgetState extends State<DeliveryStateWidget> {
                             ),
                           ),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 3),
                             margin: const EdgeInsets.only(bottom: 10),
                             decoration: BoxDecoration(
                               color: Colors.green[100],
@@ -119,7 +128,8 @@ class _DeliveryStateWidgetState extends State<DeliveryStateWidget> {
                             ),
                           ),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 3),
                             margin: const EdgeInsets.only(bottom: 10),
                             decoration: BoxDecoration(
                               color: Colors.green[100],
@@ -134,7 +144,8 @@ class _DeliveryStateWidgetState extends State<DeliveryStateWidget> {
                             ),
                           ),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 3),
                             margin: const EdgeInsets.only(bottom: 10),
                             decoration: BoxDecoration(
                               color: Colors.green[100],
@@ -149,7 +160,8 @@ class _DeliveryStateWidgetState extends State<DeliveryStateWidget> {
                             ),
                           ),
                           Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 3),
                             margin: const EdgeInsets.only(bottom: 10),
                             decoration: BoxDecoration(
                               color: Colors.green[100],
@@ -171,7 +183,13 @@ class _DeliveryStateWidgetState extends State<DeliveryStateWidget> {
                       child: const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Hàng trả lại:', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: AppColors.bgAppbar),),
+                          Text(
+                            'Hàng trả lại:',
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.bgAppbar),
+                          ),
                           SizedBox(
                             height: 5,
                           ),
@@ -179,7 +197,13 @@ class _DeliveryStateWidgetState extends State<DeliveryStateWidget> {
                           SizedBox(
                             height: 10,
                           ),
-                          Text('Lý do trả lại:', style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: AppColors.bgAppbar),),
+                          Text(
+                            'Lý do trả lại:',
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.bgAppbar),
+                          ),
                           SizedBox(
                             height: 5,
                           ),

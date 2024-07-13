@@ -1,3 +1,4 @@
+import 'package:delivery_management/styles/theme.dart';
 import 'package:flutter/material.dart';
 
 class ButtonWidget extends StatelessWidget {
@@ -8,13 +9,13 @@ class ButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60,
+      height: 40,
       width: MediaQuery.of(context).size.width,
       child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,
-              backgroundColor: Colors.indigo,
+              backgroundColor: AppColors.bgAppbar,
               padding: const EdgeInsets.all(10.0),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),

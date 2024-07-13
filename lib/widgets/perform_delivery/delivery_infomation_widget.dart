@@ -17,7 +17,7 @@ class _DeliveryInfomationWidgetState extends State<DeliveryInfomationWidget> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       decoration: BoxDecoration(
-        border: Border.all(color: AppColors.bgInfoDeiivery),
+        border: Border.all(color: AppColors.bgInfoDelivery),
         borderRadius: BorderRadius.circular(10),
         color: Colors.green[50],
       ),

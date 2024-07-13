@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../data/order_detail_data.dart';
+import '../../data/order_detail_data.dart';
 
 class OrderDetailWidget extends StatelessWidget {
   const OrderDetailWidget({super.key});

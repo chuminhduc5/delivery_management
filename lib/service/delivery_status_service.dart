@@ -1,11 +1,11 @@
 import 'dart:convert';
-
-import 'package:delivery_management/const/api_delivery.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../apis/api_endpoint.dart';
+
 class DeliveryStatusService {
-  // TODO: Call API Fetch data
+  // TODO: Call API Fetch data Delivery Status
   Future<List<dynamic>> fetchDeliveryStatus() async {
     // Lấy token đã lưu
     final prefs = await SharedPreferences.getInstance();
@@ -15,7 +15,7 @@ class DeliveryStatusService {
     }
 
     // Call API fetch Data
-    const url = ApiDelivery.GET_ALL_DELIVERY_STATUS;
+    const url = ApiEndpoint.GET_DELIVERY_STATUS;
     final uri = Uri.parse(url);
     final response = await http.get(
         uri,
@@ -30,7 +30,7 @@ class DeliveryStatusService {
     } else {
       print('Response status: ${response.statusCode}');
       print('Response body: ${response.body}');
-      throw Exception('Faild to load delivery list');
+      throw Exception('Faild to load delivery status list');
     }
   }
 
@@ -44,7 +44,7 @@ class DeliveryStatusService {
     }
 
     // Call API
-    const url = ApiDelivery.POST_UPDATE_STATUS;
+    const url = ApiEndpoint.POST_UPDATE_STATUS;
     final uri = Uri.parse(url);
     final response = await http.post(
         uri,

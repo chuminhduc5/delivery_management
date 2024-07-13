@@ -1,13 +1,12 @@
 import 'dart:convert';
+import 'package:delivery_management/apis/api_endpoint.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../const/api_delivery.dart';
 
 class AuthService {
   Future<String> authenticateUser(String username, String password) async {
     print("--------------start---------- " );
-    const url = ApiDelivery.POST_AUTH_LOGIN;
+    const url = ApiEndpoint.POST_AUTH_LOGIN;
     final uri = Uri.parse(url);
     print("--------------URL---------- $url ---------- $uri" );
     print(jsonEncode(<String, dynamic>{

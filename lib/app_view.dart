@@ -1,23 +1,25 @@
-import 'package:delivery_management/screens/delivery_screen.dart';
-import 'package:delivery_management/screens/home_screen.dart';
-import 'package:delivery_management/screens/report_screen.dart';
-import 'package:delivery_management/screens/setting_screen.dart';
-import 'package:delivery_management/screens/technique_screen.dart';
+import 'package:delivery_management/screens/main_screen/delivery_screen.dart';
+import 'package:delivery_management/screens/main_screen/home_screen.dart';
+import 'package:delivery_management/screens/main_screen/report_screen.dart';
+import 'package:delivery_management/screens/main_screen/setting_screen.dart';
+import 'package:delivery_management/screens/main_screen/technique_screen.dart';
 import 'package:delivery_management/styles/theme.dart';
 import 'package:flutter/material.dart';
-import 'screens/order_screen.dart';
+import 'screens/main_screen/order_screen.dart';
 
 
-class App extends StatefulWidget {
-  const App({super.key});
+class AppView extends StatefulWidget {
+  const AppView({super.key});
 
   @override
-  State<App> createState() => _AppState();
+  State<AppView> createState() => _AppViewState();
 }
 
-class _AppState extends State<App> {
+class _AppViewState extends State<AppView> {
   int _selectedIndex = 0;
   final PageController _pageController = PageController();
+
+  void _titleAppbar(String title){}
 
   void _navigateBottomBar(int index) {
     setState(() {
@@ -42,6 +44,14 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.bgAppbar,
+        actions: [
+          IconButton(onPressed: (){}, icon: const Icon(Icons.notifications))
+        ],
+        //actionsIconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: AppColors.white),
+      ),
       body:PageView(
         controller: _pageController,
         onPageChanged: (index) {

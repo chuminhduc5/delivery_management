@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../blocs/delivery_status_bloc/delivery_status_bloc.dart';
-import '../styles/theme.dart';
-import '../widgets/perform_delivery/billing_infomation_widget.dart';
-import '../widgets/perform_delivery/button_confirm_widget.dart';
-import '../widgets/perform_delivery/delivery_infomation_widget.dart';
-import '../widgets/perform_delivery/delivery_state_widget.dart';
-import '../widgets/perform_delivery/general_infomation_widget.dart';
+import '../../blocs/delivery_status_bloc/delivery_status_bloc.dart';
+import '../../styles/theme.dart';
+import '../../widgets/perform_delivery/billing_infomation_widget.dart';
+import '../../widgets/perform_delivery/button_confirm_widget.dart';
+import '../../widgets/perform_delivery/delivery_infomation_widget.dart';
+import '../../widgets/perform_delivery/delivery_state_widget.dart';
+import '../../widgets/perform_delivery/general_infomation_widget.dart';
 
 class PerformDeliveryScreen extends StatefulWidget {
   final Map<String, dynamic> deliveryOrder;
