@@ -35,7 +35,7 @@ class DeliveryStatusService {
   }
 
   // TODO: Call API Update Status
-  Future<void> updateDeliveryStatus(int deliveryId, int deliveryStatusId) async {
+  Future<void> updateDeliveryStatus(String deliveryId, int deliveryStatusId) async {
     // Lấy token đã lưu
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('auth_token');

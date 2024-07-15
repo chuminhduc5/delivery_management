@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/delivery_status_bloc/delivery_status_bloc.dart';
+import '../../models/delivery.dart';
 import '../../styles/theme.dart';
 import '../../widgets/perform_delivery/billing_infomation_widget.dart';
 import '../../widgets/perform_delivery/button_confirm_widget.dart';
 import '../../widgets/perform_delivery/delivery_infomation_widget.dart';
-import '../../widgets/perform_delivery/delivery_state_widget.dart';
-import '../../widgets/perform_delivery/general_infomation_widget.dart';
+import '../../widgets/perform_delivery/delivery_status_widget.dart';
 
 class PerformDeliveryScreen extends StatefulWidget {
-  final Map<String, dynamic> deliveryOrder;
+  final Delivery deliveryOrder;
 
   const PerformDeliveryScreen({super.key, required this.deliveryOrder});
 
@@ -18,7 +18,7 @@ class PerformDeliveryScreen extends StatefulWidget {
 }
 
 class _PerformDeliveryScreenState extends State<PerformDeliveryScreen> {
-  late Map<String, dynamic> deliveryOrder;
+  late Delivery deliveryOrder;
   int selectedStatusId = 0;
   String selectedStatusName = '';
 
@@ -26,8 +26,8 @@ class _PerformDeliveryScreenState extends State<PerformDeliveryScreen> {
   void initState() {
     super.initState();
     deliveryOrder = widget.deliveryOrder;
-    selectedStatusId = deliveryOrder['statusId'];
-    selectedStatusName = deliveryOrder['status'];
+    selectedStatusId = deliveryOrder.statusId;
+    selectedStatusName = deliveryOrder.status;
   }
 
   void onStatusChanged(int id, String name) {
@@ -41,7 +41,7 @@ class _PerformDeliveryScreenState extends State<PerformDeliveryScreen> {
     // Gửi sự kiện cập nhật trạng thái
     context.read<DeliveryStatusBloc>().add(
           UpdateDeliveryStatus(
-            deliveryId: deliveryOrder['id'],
+            deliveryId: deliveryOrder.id,
             deliveryStatusId: selectedStatusId,
           ),
         );
@@ -53,12 +53,17 @@ class _PerformDeliveryScreenState extends State<PerformDeliveryScreen> {
           BlocListener<DeliveryStatusBloc, DeliveryStatusState>(
         listener: (context, state) {
           if (state is UpdateDeliveryStatusSuccess) {
-            Navigator.pop(context); // Đóng hộp thoại thông báo
-            Navigator.pop(context, {
-              ...deliveryOrder,
-              'statusId': selectedStatusId,
-              'status': selectedStatusName,
-            });
+            Navigator.pop(context);
+            Navigator.pop(
+                context,
+                Delivery(
+                  id: deliveryOrder.id,
+                  status: selectedStatusName,
+                  statusId: deliveryOrder.statusId,
+                  createDate: deliveryOrder.createDate,
+                  nameCustomer: deliveryOrder.nameCustomer,
+                  customerAddress: deliveryOrder.customerAddress,
+                ));
           } else if (state is UpdateDeliveryStatusFailed) {
             Navigator.pop(context); // Đóng hộp thoại thông báo
             ScaffoldMessenger.of(context).showSnackBar(
@@ -89,7 +94,11 @@ class _PerformDeliveryScreenState extends State<PerformDeliveryScreen> {
                   fontWeight: FontWeight.w500)),
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.qr_code_2))
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/qrCode');
+              },
+              icon: const Icon(Icons.qr_code_2))
         ],
       ),
       resizeToAvoidBottomInset: false,
@@ -100,37 +109,18 @@ class _PerformDeliveryScreenState extends State<PerformDeliveryScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Column(
                 children: <Widget>[
-                  DeliveryInfomationWidget(deliveryOrder: widget.deliveryOrder),
-                  DeliveryStateWidget(
+                  DeliveryInfomationWidget(deliveryOrder: deliveryOrder),
+                  DeliveryStatusWidget(
                     onStatusChanged: onStatusChanged,
                     initialStatusId: selectedStatusId,
                     initialStatusName: selectedStatusName,
                   ),
                   const BillingInfomationWidget(),
-                  // const TabBar(
-                  //   tabs: [
-                  //     Tab(
-                  //       text: 'Thông tin chung',
-                  //     ),
-                  //     Tab(
-                  //       text: 'Thông tin thanh toán',
-                  //     )
-                  //   ],
-                  //   labelColor: AppColors.bgAppbar,
-                  //   indicatorColor: AppColors.bgAppbar,
-                  //   dividerColor: AppColors.bgColor,
-                  // ),
-                  // Expanded(
-                  //     child: TabBarView(children: [
-                  //   InfomationWidget(deliveryOrder: widget.deliveryOrder),
-                  //   const BillingInfoScreen(),
-                  // ])),
                   Container(
                     padding: const EdgeInsets.all(10),
                     child: Align(
                       alignment: Alignment.bottomRight,
-                      child: ButtonConfirmWidget(
-                          onPressed: onConfirm),
+                      child: ButtonConfirmWidget(onPressed: onConfirm),
                     ),
                   ),
                 ],

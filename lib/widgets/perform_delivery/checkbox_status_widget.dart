@@ -5,12 +5,14 @@ class CheckboxStatusWidget extends StatelessWidget {
   final bool value;
   final ValueChanged<bool?> onChanged;
   final String title;
+  final bool isLocked;
 
   const CheckboxStatusWidget(
       {super.key,
       required this.value,
       required this.onChanged,
-      required this.title});
+      required this.title,
+      this.isLocked = false});
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +24,10 @@ class CheckboxStatusWidget extends StatelessWidget {
       visualDensity: const VisualDensity(vertical: -4.0),
       // Thay đổi màu viền
       side: const BorderSide(color: Colors.grey),
-      activeColor: AppColors.activeColor,
+      activeColor: isLocked ? Colors.grey : AppColors.activeColor,
       checkColor: AppColors.checkColor,
       value: value,
-      onChanged: onChanged,
+      onChanged: isLocked ? null : onChanged,
       title: Transform.translate(
           offset: const Offset(0, 0),
           child: Text(

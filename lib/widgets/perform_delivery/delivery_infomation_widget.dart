@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
+import '../../models/delivery.dart';
 import '../../styles/theme.dart';
 
 class DeliveryInfomationWidget extends StatefulWidget {
-  final Map<String, dynamic> deliveryOrder;
+  final Delivery deliveryOrder;
   const DeliveryInfomationWidget({super.key, required this.deliveryOrder});
 
   @override
@@ -34,7 +34,7 @@ class _DeliveryInfomationWidgetState extends State<DeliveryInfomationWidget> {
                   const Text('Số:', style: TextStyle(fontWeight: FontWeight.w500),),
                   Padding(
                     padding: const EdgeInsets.only(left: 5), // Khoảng cách giữa hai cột
-                    child: Text(widget.deliveryOrder['id'].toString()),
+                    child: Text(widget.deliveryOrder.id),
                   ),
                 ],
               ),
@@ -44,7 +44,7 @@ class _DeliveryInfomationWidgetState extends State<DeliveryInfomationWidget> {
                   Padding(
                     padding: const EdgeInsets.only(left: 5),
                     child: Text(
-                      widget.deliveryOrder['nameCustomer'],
+                      widget.deliveryOrder.nameCustomer,
                       overflow: TextOverflow.visible,
                       softWrap: true,
                     ),
@@ -57,7 +57,7 @@ class _DeliveryInfomationWidgetState extends State<DeliveryInfomationWidget> {
                   Padding(
                     padding: const EdgeInsets.only(left: 5),
                     child: Text(
-                      widget.deliveryOrder['toAddress'],
+                      widget.deliveryOrder.customerAddress,
                       overflow: TextOverflow.visible,
                       softWrap: true,
                     ),

@@ -3,7 +3,6 @@ import 'package:delivery_management/widgets/technique/technique_card_widget.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../service/technique_service.dart';
-import '../../styles/theme.dart';
 import '../../widgets/common_widget/search_field_widget.dart';
 
 class TechniqueScreen extends StatefulWidget {
@@ -27,21 +26,6 @@ class _TechniqueScreenState extends State<TechniqueScreen> {
     final double maxWidthScreen = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.grey[100],
-      appBar: AppBar(
-        backgroundColor: Colors.grey[300],
-        title: const Center(
-          child: Text(
-            'Danh sách đơn hàng KTKT',
-            style: TextStyle(color: AppColors.textBlack, fontSize: 20),
-          ),
-        ),
-        bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(4.0),
-            child: Container(
-              color: AppColors.bgOutlineGrey,
-              height: 1.0,
-            )),
-      ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: BlocProvider(

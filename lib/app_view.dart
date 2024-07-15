@@ -5,8 +5,6 @@ import 'package:delivery_management/screens/main_screen/setting_screen.dart';
 import 'package:delivery_management/screens/main_screen/technique_screen.dart';
 import 'package:delivery_management/styles/theme.dart';
 import 'package:flutter/material.dart';
-import 'screens/main_screen/order_screen.dart';
-
 
 class AppView extends StatefulWidget {
   const AppView({super.key});
@@ -19,8 +17,6 @@ class _AppViewState extends State<AppView> {
   int _selectedIndex = 0;
   final PageController _pageController = PageController();
 
-  void _titleAppbar(String title){}
-
   void _navigateBottomBar(int index) {
     setState(() {
       _selectedIndex = index;
@@ -32,9 +28,16 @@ class _AppViewState extends State<AppView> {
     );
   }
 
+  final List<String> _title = [
+    'Trang chủ',
+    'Danh sách giao vận',
+    'Danh sách đơn hàng KTKT',
+    'Báo cáo',
+    'Cài đặt'
+  ];
+
   final List<Widget> _screens = [
     const HomeScreen(),
-    const OrderScreen(),
     const DeliveryScreen(),
     const TechniqueScreen(),
     const ReportScreen(),
@@ -46,13 +49,17 @@ class _AppViewState extends State<AppView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.bgAppbar,
+        title: Center(child: Text(_title[_selectedIndex], style: const TextStyle(color: AppColors.textWhile),)),
         actions: [
-          IconButton(onPressed: (){}, icon: const Icon(Icons.notifications))
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/notification');
+              },
+              icon: const Icon(Icons.notifications))
         ],
-        //actionsIconTheme: IconThemeData(color: Colors.white),
         iconTheme: const IconThemeData(color: AppColors.white),
       ),
-      body:PageView(
+      body: PageView(
         controller: _pageController,
         onPageChanged: (index) {
           setState(() {
@@ -71,10 +78,12 @@ class _AppViewState extends State<AppView> {
         unselectedFontSize: 10,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Trang chủ'),
-          BottomNavigationBarItem(icon: Icon(Icons.article), label: 'Đơn hàng'),
-          BottomNavigationBarItem(icon: Icon(Icons.local_shipping), label: 'Giao vận'),
-          BottomNavigationBarItem(icon: Icon(Icons.construction), label: 'Kỹ thuật'),
-          BottomNavigationBarItem(icon: Icon(Icons.bar_chart_outlined), label: 'Báo cáo'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.local_shipping), label: 'Giao vận'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.construction), label: 'Kỹ thuật'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.bar_chart_outlined), label: 'Báo cáo'),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Cài đặt'),
         ],
       ),

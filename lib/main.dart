@@ -1,5 +1,11 @@
 import 'package:delivery_management/blocs/delivery_status_bloc/delivery_status_bloc.dart';
 import 'package:delivery_management/screens/auth/sign_in_screen.dart';
+import 'package:delivery_management/screens/main_screen/delivery_screen.dart';
+import 'package:delivery_management/screens/main_screen/home_screen.dart';
+import 'package:delivery_management/screens/main_screen/report_screen.dart';
+import 'package:delivery_management/screens/main_screen/technique_screen.dart';
+import 'package:delivery_management/screens/secondary_screen/notification_screen.dart';
+import 'package:delivery_management/screens/secondary_screen/qr_code_screen.dart';
 import 'package:delivery_management/service/auth_service.dart';
 import 'package:delivery_management/service/delivery_status_service.dart';
 import 'package:delivery_management/utils/simple_bloc_observer.dart';
@@ -30,13 +36,16 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         initialRoute: '/',
         routes: {
+          '/app': (context) => const AppView(),
           '/signIn': (context) => const SignInScreen(),
-          '/app': (context) => const AppView()
+          '/home': (context) => const HomeScreen(),
+          '/delivery': (context) => const DeliveryScreen(),
+          '/technique': (context) => const TechniqueScreen(),
+          '/report': (context) => const ReportScreen(),
+          '/notification': (context) => const NotificationScreen(),
+          '/qrCode': (context) => const QrCodeScreen(),
         },
-        //home: const TransportStaffScreen(),
-        //home: const App(),
         home: const SignInScreen(),
-        //home: const DeliveryScreen(),
         debugShowCheckedModeBanner: false,
       ),
     );

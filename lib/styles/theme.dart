@@ -28,6 +28,6 @@ abstract class AppColors {
   static const Color statusGreen = Colors.green;
   static const Color greenWithOpacity = Color.fromRGBO(0, 255, 0, 0.1);
   static const Color statusRed = Colors.red;
-  // static const Color redWithOpacity = Color.fromRGBO(255, 0, 0, 0.1);
+  static const Color redWithOpacity = Color.fromRGBO(255, 0, 0, 0.1);
 
 }

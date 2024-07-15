@@ -18,6 +18,7 @@ class _SelectReturnedGoodWidgetState extends State<SelectReturnedGoodWidget> {
     'ĐH giao chưa thành công do Hacom',
     'Hàng đã giao-nối chuyến',
     'Hàng đã giao',
+    'Hàng đã giao','Hàng đã giao','Hàng đã giao','Hàng đã giao','Hàng đã giao',
   ];
   String? selectedValue;
   bool _isExpanded = false;
@@ -78,7 +79,7 @@ class _SelectReturnedGoodWidgetState extends State<SelectReturnedGoodWidget> {
           iconSize: 14,
         ),
         dropdownStyleData: DropdownStyleData(
-          width: maxWidthScreen,
+          width: maxWidthScreen * 0.92,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: Colors.white,

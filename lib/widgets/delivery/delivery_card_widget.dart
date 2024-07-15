@@ -1,17 +1,32 @@
+import 'package:delivery_management/models/delivery.dart';
 import 'package:flutter/material.dart';
 import '../../styles/theme.dart';
 
 class DeliveryCardWidget extends StatelessWidget {
-  final String id;
-  final String status;
-  final String statusUpdateTime;
-  final String address;
+  final Delivery delivery;
 
   const DeliveryCardWidget(
-       this.id,
-       this.status,
-       this.statusUpdateTime,
-       this.address, {super.key});
+      {super.key, required this.delivery});
+
+  Color _statusColorBg(String status){
+    const delivered = AppColors.greenWithOpacity;
+    const delivering = AppColors.redWithOpacity;
+
+    if (status == "Hàng đã giao" || status == "Hàng đã giao - nối chuyến") {
+      return delivered;
+    }
+    return delivering;
+  }
+
+  Color _statusColor(String status){
+    const delivered = Colors.green;
+    const delivering = Colors.red;
+
+    if (status == "Hàng đã giao" || status == "Hàng đã giao - nối chuyến") {
+      return delivered;
+    }
+    return delivering;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +34,7 @@ class DeliveryCardWidget extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 10, top: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: Colors.grey[50],
+        color: AppColors.bgInfoDelivery,
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -35,23 +50,24 @@ class DeliveryCardWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color: Colors.red[50],
+                          color: _statusColorBg(delivery.status),
                         ),
-
                         child: Text(
-                          status,
-                          style: const TextStyle(
-                              color: AppColors.statusRed,
+                          delivery.status,
+                          style: TextStyle(
+                              color: _statusColor(delivery.status),
                               fontSize: 15,
                               fontWeight: FontWeight.w600),
                         ),
                       ),
                       Text(
-                        statusUpdateTime,
-                        style: const TextStyle(fontSize: 13, color: AppColors.textBlack),
+                        delivery.createDate,
+                        style: const TextStyle(
+                            fontSize: 13, color: AppColors.textBlack),
                       ),
                     ],
                   ),
@@ -68,7 +84,7 @@ class DeliveryCardWidget extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                         )),
                     TextSpan(
-                        text: address,
+                        text: delivery.customerAddress,
                         style: const TextStyle(
                           fontSize: 14,
                           color: Colors.black,
@@ -93,7 +109,7 @@ class DeliveryCardWidget extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       )),
                   TextSpan(
-                      text: id,
+                      text: delivery.id,
                       style: const TextStyle(
                         fontSize: 14,
                         color: Colors.black,

@@ -10,12 +10,22 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.6
-  flutter_bloc: ^8.1.4
+  # Package Support Call API
   http: ^1.2.1
+
+  # Package Support Icon
+  cupertino_icons: ^1.0.6
+
+  # Package Support Status Management
+  flutter_bloc: ^8.1.4
+
+  # Package Support Notification
+
+  # Package Support 
   shared_preferences: ^2.2.3
   equatable: ^2.0.5
   dropdown_button2: ^2.3.9
+  awesome_notifications: ^0.9.3+1
 
 dev_dependencies:
   flutter_test:

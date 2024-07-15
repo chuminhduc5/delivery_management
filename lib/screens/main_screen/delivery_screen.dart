@@ -27,22 +27,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
   Widget build(BuildContext context) {
     final double maxWidthScreen = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.grey[100],
-      appBar: AppBar(
-        backgroundColor: Colors.grey[300],
-        title: const Center(
-          child: Text(
-            'Danh sách đơn giao hàng',
-            style: TextStyle(color: AppColors.textBlack, fontSize: 20),
-          ),
-        ),
-        bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(4.0),
-            child: Container(
-              color: AppColors.bgOutlineGrey,
-              height: 1.0,
-            )),
-      ),
+      backgroundColor: AppColors.bgColor,
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: BlocProvider(
@@ -70,7 +55,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                         child: ListView.builder(
                           itemCount: state.items.length,
                           itemBuilder: (context, index) {
-                            final item = state.items[index];
+                            final delivery = state.items[index];
                             return InkWell(
                                 onTap: () async {
                                   final updatedOrder = await Navigator.push(
@@ -78,7 +63,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                     MaterialPageRoute(
                                       builder: (context) =>
                                           PerformDeliveryScreen(
-                                              deliveryOrder: item),
+                                              deliveryOrder: delivery),
                                     ),
                                   );
                                   if (updatedOrder != null) {
@@ -87,11 +72,7 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                     });
                                   }
                                 },
-                                child: DeliveryCardWidget(
-                                    item['id'].toString(),
-                                    item['status'].toString(),
-                                    item['createDate'] ?? '',
-                                    item['customerAddress'] ?? ''));
+                                child: DeliveryCardWidget(delivery: delivery));
                           },
                         ),
                       ),

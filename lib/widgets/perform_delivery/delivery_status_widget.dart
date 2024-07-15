@@ -7,22 +7,25 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../styles/theme.dart';
 
-class DeliveryStateWidget extends StatefulWidget {
+class DeliveryStatusWidget extends StatefulWidget {
   final Function(int id, String name) onStatusChanged;
   final int initialStatusId;
   final String initialStatusName;
+  final bool isLooked;
 
-  const DeliveryStateWidget(
+  const DeliveryStatusWidget(
       {super.key,
       required this.onStatusChanged,
       required this.initialStatusId,
-      required this.initialStatusName});
+      required this.initialStatusName,
+        this.isLooked = false
+      });
 
   @override
-  State<DeliveryStateWidget> createState() => _DeliveryStateWidgetState();
+  State<DeliveryStatusWidget> createState() => _DeliveryStatusWidgetState();
 }
 
-class _DeliveryStateWidgetState extends State<DeliveryStateWidget> {
+class _DeliveryStatusWidgetState extends State<DeliveryStatusWidget> {
   late int selectedStatusId;
   late String selectedStatusName;
 
@@ -93,22 +96,7 @@ class _DeliveryStateWidgetState extends State<DeliveryStateWidget> {
                                 updateSelectedStatus(3, getNameById(items, 3));
                               },
                               title: getNameById(items, 3),
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 3),
-                            margin: const EdgeInsets.only(bottom: 10),
-                            decoration: BoxDecoration(
-                              color: Colors.green[100],
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: CheckboxStatusWidget(
-                              value: selectedStatusId == 4,
-                              onChanged: (bool? value) {
-                                updateSelectedStatus(4, getNameById(items, 4));
-                              },
-                              title: getNameById(items, 4),
+                              //isLocked: items["id"]== widget.initialStatusId,
                             ),
                           ),
                           Container(
@@ -141,6 +129,22 @@ class _DeliveryStateWidgetState extends State<DeliveryStateWidget> {
                                 updateSelectedStatus(6, getNameById(items, 6));
                               },
                               title: getNameById(items, 6),
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 3),
+                            margin: const EdgeInsets.only(bottom: 10),
+                            decoration: BoxDecoration(
+                              color: Colors.green[100],
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: CheckboxStatusWidget(
+                              value: selectedStatusId == 4,
+                              onChanged: (bool? value) {
+                                updateSelectedStatus(4, getNameById(items, 4));
+                              },
+                              title: getNameById(items, 4),
                             ),
                           ),
                           Container(

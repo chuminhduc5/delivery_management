@@ -94,7 +94,7 @@ class TechniqueCardWidget extends StatelessWidget {
               height: 5,
             ),
             Align(
-              alignment: Alignment.bottomRight,
+              alignment: Alignment.bottomLeft,
               child: Container(
                 padding:
                 const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
