@@ -1,3 +1,4 @@
+import 'package:delivery_management/styles/theme.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldAuthWidget extends StatelessWidget {
@@ -38,15 +39,13 @@ class TextFieldAuthWidget extends StatelessWidget {
         prefixIcon: prefixIcon,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: Colors.black, width: 0,),
+          borderSide: BorderSide(color: Colors.grey[100]!, width: 0,),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: Colors.blue, width: 1),
-
+          borderSide: const BorderSide(color: AppColors.green, width: 1),
         ),
-        //fillColor: Colors.grey.shade200,
-        fillColor: Colors.white,
+        fillColor: Colors.grey[100],
         filled: true,
         hintText: hinText,
         hintStyle: TextStyle(color: Colors.grey[500]),

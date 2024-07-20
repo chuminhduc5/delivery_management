@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../styles/theme.dart';
-import '../../widgets/delivery/bill_of_landing_info_widget.dart';
 import '../../widgets/common_widget/search_field_widget.dart';
 
 class DeliveryStaffScreen extends StatefulWidget {
@@ -62,7 +61,6 @@ class _DeliveryStaffScreenState extends State<DeliveryStaffScreen> {
             ),
             //DeliveryOrderListWidget(searchDeliveryOrder: _searchDeliveryOrder),
             const SizedBox(height: 50),
-            const BillOfLandingInfoWidget(),
           ],
         ),
       ),
