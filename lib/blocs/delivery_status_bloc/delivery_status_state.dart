@@ -9,7 +9,7 @@ abstract class DeliveryStatusState extends Equatable{
   List<Object?> get props => [];
 }
 
-// Trạng thái khi request
+// Trạng thái khi fetch data
 class DeliveryStatusFetchInitial extends DeliveryStatusState {}
 
 class DeliveryStatusFetchLoading extends DeliveryStatusState {}
@@ -36,7 +36,14 @@ class DeliveryStatusFetchFailed extends DeliveryStatusState {
 // Trạng thái khi cập nhập trạng thái dữ liệu
 class UpdateDeliveryStatusLoading extends DeliveryStatusState {}
 
-class UpdateDeliveryStatusSuccess extends DeliveryStatusState {}
+class UpdateDeliveryStatusSuccess extends DeliveryStatusState {
+  final dynamic updatedOrder; // Define updatedOrder here
+
+  const UpdateDeliveryStatusSuccess({required this.updatedOrder});
+
+  @override
+  List<Object?> get props => [updatedOrder];
+}
 
 class UpdateDeliveryStatusFailed extends DeliveryStatusState {
   final String message;

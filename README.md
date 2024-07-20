@@ -5,7 +5,7 @@ App quản lý giao vận
 
 ### 1. apis: Chứa đường dẫn URL Api
 
-### 2. bLocs: Quản lý trạng thái ứng dụng
+### 2. blocs: Quản lý trạng thái ứng dụng
 
 ### 3. models: Ánh xạ dữ liệu từ Database
 
@@ -15,4 +15,9 @@ App quản lý giao vận
 
 ### 6. styles: Quản lý màu sắc của ứng dụng
 
-### 7. widget: Tạo ra các widget để sử dụng trong ứng dụng
+### 7. utils: Các tiện ích của ứng dụng
+
+### 8. widget: Tạo ra các widget để sử dụng trong ứng dụng
+#####
+- Cài dặt intelIJ Community Edition hoặc Android Studio để chạy chương trình
+- Chạy lệnh flutter pub get để tải về các package

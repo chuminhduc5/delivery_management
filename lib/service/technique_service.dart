@@ -3,9 +3,10 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../apis/api_endpoint.dart';
+import '../models/technique.dart';
 
 class TechniqueService {
-  Future<List<dynamic>> fetchTechnique() async {
+  Future<List<Technique>> fetchTechnique() async {
     // Lấy token đã lưu
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('auth_token');
@@ -23,8 +24,8 @@ class TechniqueService {
         }
     );
     if (response.statusCode == 200){
-      final Map<String, dynamic>result = jsonDecode(response.body);
-      return result['data'];
+      final List<dynamic> responseBody = jsonDecode(response.body)['data'];
+      return responseBody.map((json) => Technique.fromMap(json)).toList();
     } else {
       print('Response status: ${response.statusCode}');
       print('Response body: ${response.body}');

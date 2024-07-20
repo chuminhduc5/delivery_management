@@ -1,12 +1,14 @@
 import 'package:delivery_management/models/delivery.dart';
+import 'package:delivery_management/models/delivery_status.dart';
 import 'package:flutter/material.dart';
 import '../../styles/theme.dart';
 
 class DeliveryCardWidget extends StatelessWidget {
   final Delivery delivery;
+  final List<DeliveryStatus> statusList;
 
   const DeliveryCardWidget(
-      {super.key, required this.delivery});
+      {super.key, required this.delivery, required this.statusList});
 
   Color _statusColorBg(String status){
     const delivered = AppColors.greenWithOpacity;
@@ -30,8 +32,9 @@ class DeliveryCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final statusName = delivery.getStatusName(statusList);
     return Container(
-      margin: const EdgeInsets.only(bottom: 10, top: 5),
+      margin: const EdgeInsets.fromLTRB(15, 0, 15, 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: AppColors.bgInfoDelivery,
@@ -54,12 +57,12 @@ class DeliveryCardWidget extends StatelessWidget {
                             horizontal: 10, vertical: 5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color: _statusColorBg(delivery.status),
+                          color: _statusColorBg(statusName),
                         ),
                         child: Text(
-                          delivery.status,
+                          statusName,
                           style: TextStyle(
-                              color: _statusColor(delivery.status),
+                              color: _statusColor(statusName),
                               fontSize: 15,
                               fontWeight: FontWeight.w600),
                         ),
@@ -109,7 +112,7 @@ class DeliveryCardWidget extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       )),
                   TextSpan(
-                      text: delivery.id,
+                      text: delivery.transactionNumber,
                       style: const TextStyle(
                         fontSize: 14,
                         color: Colors.black,

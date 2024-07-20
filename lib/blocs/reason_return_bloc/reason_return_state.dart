@@ -14,7 +14,7 @@ class ReasonReturnInitial extends ReasonReturnState {}
 class ReasonReturnLoading extends ReasonReturnState {}
 
 class ReasonReturnSuccess extends ReasonReturnState {
-  final List<dynamic> items;
+  final List<ReasonReturn> items;
   const ReasonReturnSuccess({required this.items});
 
   @override

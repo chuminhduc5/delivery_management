@@ -12,13 +12,8 @@ class SelectReturnedGoodWidget extends StatefulWidget {
 
 class _SelectReturnedGoodWidgetState extends State<SelectReturnedGoodWidget> {
   final List<String> items = [
-    'Đang giao hàng',
-    'Đã đến nơi',
-    'ĐH giao chưa thành công do KH',
-    'ĐH giao chưa thành công do Hacom',
-    'Hàng đã giao-nối chuyến',
-    'Hàng đã giao',
-    'Hàng đã giao','Hàng đã giao','Hàng đã giao','Hàng đã giao','Hàng đã giao',
+    'Khách trả lại một phần',
+    'Khách trả lại tất cả'
   ];
   String? selectedValue;
   bool _isExpanded = false;
@@ -31,7 +26,7 @@ class _SelectReturnedGoodWidgetState extends State<SelectReturnedGoodWidget> {
       child: DropdownButton2<String>(
         isExpanded: true,
         hint: const Text(
-          'Lý do khách trả lại hàng',
+          'Hàng trả lại',
           style: TextStyle(
             fontSize: 14,
             color: Colors.grey,
@@ -79,6 +74,7 @@ class _SelectReturnedGoodWidgetState extends State<SelectReturnedGoodWidget> {
           iconSize: 14,
         ),
         dropdownStyleData: DropdownStyleData(
+          maxHeight: 70,
           width: maxWidthScreen * 0.92,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
@@ -91,8 +87,9 @@ class _SelectReturnedGoodWidgetState extends State<SelectReturnedGoodWidget> {
             thumbVisibility: WidgetStateProperty.all(true),
           ),
         ),
-        menuItemStyleData: const MenuItemStyleData(
+        menuItemStyleData: MenuItemStyleData(
           height: 30,
+          overlayColor: WidgetStateProperty.all(AppColors.greenWithOpacity),
         ),
       ),
     );

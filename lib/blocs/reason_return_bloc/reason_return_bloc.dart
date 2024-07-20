@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 
+import '../../models/reason_return.dart';
 import '../../service/reason_return_service.dart';
 
 part 'reason_return_event.dart';
@@ -18,7 +19,7 @@ class ReasonReturnBloc extends Bloc<ReasonReturnEvent, ReasonReturnState> {
   void _onFetchReasonReturn(FetchReasonReturn event, Emitter<ReasonReturnState> emit) async {
     emit (ReasonReturnLoading());
     try {
-      final items = await reasonReturnService.fetchReasonReturn();
+      final List<ReasonReturn> items  = await reasonReturnService.fetchReasonReturn();
       emit(ReasonReturnSuccess(items: items));
     } catch (e) {
       emit(ReasonReturnFailed(message: e.toString()));

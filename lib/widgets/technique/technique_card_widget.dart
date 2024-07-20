@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
 
-class TechniqueCardWidget extends StatelessWidget {
-  final String id;
-  final String status;
-  final String date;
-  final String branch;
+import '../../models/technique.dart';
+import '../../styles/theme.dart';
 
-  const TechniqueCardWidget(
-      {super.key,
-        required this.id,
-        required this.status,
-        required this.date,
-        required this.branch});
+class TechniqueCardWidget extends StatelessWidget {
+  final Technique technique;
+
+  const TechniqueCardWidget({super.key,
+    required this.technique,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 10, top: 5),
+      margin: const EdgeInsets.fromLTRB(15, 5, 15, 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: Colors.grey[200],
+        color: AppColors.bgInfoDelivery,
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
@@ -40,14 +37,14 @@ class TechniqueCardWidget extends StatelessWidget {
                             fontWeight: FontWeight.w600,
                           )),
                       TextSpan(
-                          text: id,
+                          text: technique.id,
                           style: const TextStyle(
                             fontSize: 14,
                             color: Colors.black,
                           ))
                     ])),
                 Text(
-                  date,
+                  technique.createDate,
                   style: const TextStyle(fontSize: 13, color: Colors.black),
                 ),
               ],
@@ -65,7 +62,7 @@ class TechniqueCardWidget extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       )),
                   TextSpan(
-                      text: date,
+                      text: technique.createDate,
                       style: const TextStyle(
                         fontSize: 14,
                         color: Colors.black,
@@ -84,7 +81,7 @@ class TechniqueCardWidget extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       )),
                   TextSpan(
-                      text: branch,
+                      text: technique.description,
                       style: const TextStyle(
                         fontSize: 14,
                         color: Colors.black,
@@ -100,12 +97,12 @@ class TechniqueCardWidget extends StatelessWidget {
                 const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: Colors.green[50],
+                  color: AppColors.redWithOpacity
                 ),
                 child: Text(
-                  status,
+                  technique.status,
                   style: const TextStyle(
-                      color: Colors.green,
+                      color: Colors.red,
                       fontSize: 15,
                       fontWeight: FontWeight.w600),
                 ),

@@ -1,48 +1,52 @@
+import 'package:delivery_management/screens/main_screen/delivery_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/delivery_status_bloc/delivery_status_bloc.dart';
 import '../../models/delivery.dart';
+import '../../models/delivery_status.dart';
 import '../../styles/theme.dart';
+import '../../utils/error_message_utils.dart';
 import '../../widgets/perform_delivery/billing_infomation_widget.dart';
 import '../../widgets/perform_delivery/button_confirm_widget.dart';
 import '../../widgets/perform_delivery/delivery_infomation_widget.dart';
 import '../../widgets/perform_delivery/delivery_status_widget.dart';
 
 class PerformDeliveryScreen extends StatefulWidget {
-  final Delivery deliveryOrder;
+  final Delivery deliveryStatus;
 
-  const PerformDeliveryScreen({super.key, required this.deliveryOrder});
+  const PerformDeliveryScreen(
+      {super.key, required this.deliveryStatus});
 
   @override
   State<PerformDeliveryScreen> createState() => _PerformDeliveryScreenState();
 }
 
 class _PerformDeliveryScreenState extends State<PerformDeliveryScreen> {
-  late Delivery deliveryOrder;
+  late Delivery deliveryStatus;
   int selectedStatusId = 0;
   String selectedStatusName = '';
 
   @override
   void initState() {
     super.initState();
-    deliveryOrder = widget.deliveryOrder;
-    selectedStatusId = deliveryOrder.statusId;
-    selectedStatusName = deliveryOrder.status;
+    deliveryStatus = widget.deliveryStatus;
+    selectedStatusId = deliveryStatus.statusId;
+    //selectedStatusName = deliveryOrder.status;
   }
 
-  void onStatusChanged(int id, String name) {
+  void onStatusChanged(int value, String name) {
     setState(() {
-      selectedStatusId = id;
+      selectedStatusId = value;
       selectedStatusName = name;
     });
   }
 
-  void onConfirm() {
+  void onConfirm() async {
     // Gửi sự kiện cập nhật trạng thái
     context.read<DeliveryStatusBloc>().add(
           UpdateDeliveryStatus(
-            deliveryId: deliveryOrder.id,
-            deliveryStatusId: selectedStatusId,
+            deliveryId: (deliveryStatus.id).toString(),
+            deliveryStatusId: selectedStatusId.toString(),
           ),
         );
 
@@ -55,22 +59,19 @@ class _PerformDeliveryScreenState extends State<PerformDeliveryScreen> {
           if (state is UpdateDeliveryStatusSuccess) {
             Navigator.pop(context);
             Navigator.pop(
-                context,
-                Delivery(
-                  id: deliveryOrder.id,
-                  status: selectedStatusName,
-                  statusId: deliveryOrder.statusId,
-                  createDate: deliveryOrder.createDate,
-                  nameCustomer: deliveryOrder.nameCustomer,
-                  customerAddress: deliveryOrder.customerAddress,
-                ));
+              context,
+              Delivery(
+                id: deliveryStatus.id,
+                statusId: deliveryStatus.statusId,
+                createDate: deliveryStatus.createDate,
+                customerAddress: deliveryStatus.customerAddress,
+                transactionNumber: deliveryStatus.transactionNumber,
+              ),
+            );
           } else if (state is UpdateDeliveryStatusFailed) {
             Navigator.pop(context); // Đóng hộp thoại thông báo
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                  content:
-                      Text('Cập nhật trạng thái thất bại: ${state.message}')),
-            );
+            errorMessageUtils(context,
+                message: 'Cập nhật trạng thái thất bại: ${state.message}');
           }
         },
         child: const Center(child: CircularProgressIndicator()),
@@ -109,7 +110,7 @@ class _PerformDeliveryScreenState extends State<PerformDeliveryScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Column(
                 children: <Widget>[
-                  DeliveryInfomationWidget(deliveryOrder: deliveryOrder),
+                  DeliveryInfomationWidget(deliveryOrder: deliveryStatus),
                   DeliveryStatusWidget(
                     onStatusChanged: onStatusChanged,
                     initialStatusId: selectedStatusId,

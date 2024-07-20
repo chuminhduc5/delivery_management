@@ -49,7 +49,7 @@ class _AppViewState extends State<AppView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.bgAppbar,
-        title: Center(child: Text(_title[_selectedIndex], style: const TextStyle(color: AppColors.textWhile),)),
+        flexibleSpace: Center(child: Text(_title[_selectedIndex], style: const TextStyle(fontSize: 20, color: AppColors.textWhile),)),
         actions: [
           IconButton(
               onPressed: () {

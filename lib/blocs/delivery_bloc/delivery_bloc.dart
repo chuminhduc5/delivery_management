@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:delivery_management/models/delivery.dart';
 import 'package:meta/meta.dart';
 
 import '../../service/delivery_service.dart';
@@ -16,7 +17,7 @@ class DeliveryBloc extends Bloc<DeliveryEvent, DeliveryState> {
   Future<void> _onDeliveryFetchRequested(DeliveryFetchRequested event, Emitter<DeliveryState> emit) async {
     emit(DeliveryLoading());
     try {
-      final items = await deliveryService.fetchDelivery();
+      final List<Delivery> items = await deliveryService.fetchDelivery();
       emit(DeliverySuccess(items: items));
     } catch (e) {
       emit(DeliveryFailed(message: e.toString()));

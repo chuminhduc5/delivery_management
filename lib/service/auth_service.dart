@@ -32,7 +32,7 @@ class AuthService {
       return responseBody['data']['jwt'];
     } else {
       print('---------------Response status---------------------: ${response.statusCode}');
-      print('----------------------Response body-------------------: ${response.body}'); // Log response body để xem chi tiết
+      print('----------------------Response body-------------------: ${response.body}');
       throw Exception('Failed to login');
     }
   }

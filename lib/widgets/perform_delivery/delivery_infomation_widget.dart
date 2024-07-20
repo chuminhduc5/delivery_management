@@ -34,7 +34,7 @@ class _DeliveryInfomationWidgetState extends State<DeliveryInfomationWidget> {
                   const Text('Số:', style: TextStyle(fontWeight: FontWeight.w500),),
                   Padding(
                     padding: const EdgeInsets.only(left: 5), // Khoảng cách giữa hai cột
-                    child: Text(widget.deliveryOrder.id),
+                    child: Text(widget.deliveryOrder.transactionNumber),
                   ),
                 ],
               ),
@@ -44,7 +44,7 @@ class _DeliveryInfomationWidgetState extends State<DeliveryInfomationWidget> {
                   Padding(
                     padding: const EdgeInsets.only(left: 5),
                     child: Text(
-                      widget.deliveryOrder.nameCustomer,
+                      '',//widget.deliveryOrder.nameCustomer,
                       overflow: TextOverflow.visible,
                       softWrap: true,
                     ),

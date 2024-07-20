@@ -3,10 +3,11 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../apis/api_endpoint.dart';
+import '../models/reason_return.dart';
 
 class ReasonReturnService {
   // TODO: Call API fetch data Reason return
-  Future<List<dynamic>> fetchReasonReturn () async{
+  Future<List<ReasonReturn>> fetchReasonReturn () async{
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('auth_token');
     if (token == null) {
@@ -23,8 +24,10 @@ class ReasonReturnService {
       }
     );
     if (response.statusCode == 200) {
-      final Map<String, dynamic>responseBody = jsonDecode(response.body);
-      return responseBody['data'];
+      // final Map<String, dynamic>responseBody = jsonDecode(response.body);
+      // return responseBody['data'];
+      final List<dynamic> responseBody = jsonDecode(response.body)['data'];
+      return responseBody.map((json) => ReasonReturn.fromMap(json)).toList();
     } else {
       print('Response status: ${response.statusCode}');
       print('Response body: ${response.body}');

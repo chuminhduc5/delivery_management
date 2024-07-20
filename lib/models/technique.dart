@@ -1,21 +1,21 @@
 class Technique {
   final String id;
   final String status;
-  final String date;
-  final String branch;
+  final String createDate;
+  final String description;
 
   Technique(
       {required this.id,
       required this.status,
-      required this.date,
-      required this.branch});
+      required this.createDate,
+      required this.description});
 
   factory Technique.fromMap(Map<String, dynamic> json) {
     return Technique(
-        id: json[''],
-        status: json[''],
-        date: json[''],
-        branch: json[''],
+      id: json['id'].toString(),
+      status: json['status'].toString(),
+      createDate: json['createDate'] ?? '',
+      description: json['description'].toString(),
     );
   }
 }

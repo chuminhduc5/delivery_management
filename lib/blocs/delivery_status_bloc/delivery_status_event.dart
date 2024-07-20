@@ -15,7 +15,7 @@ class DeliveryStatusFetch extends DeliveryStatusEvent {}
 // Sự kiện khi cập nhật dữ liệu
 class UpdateDeliveryStatus extends DeliveryStatusEvent {
   final String deliveryId;
-  final int deliveryStatusId;
+  final String deliveryStatusId;
 
   const UpdateDeliveryStatus({
     required this.deliveryId,
