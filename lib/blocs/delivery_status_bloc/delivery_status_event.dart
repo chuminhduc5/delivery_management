@@ -5,7 +5,6 @@ abstract class DeliveryStatusEvent extends Equatable {
   const DeliveryStatusEvent();
 
   @override
-  // TODO: implement props
   List<Object?> get props => [];
 }
 
@@ -23,6 +22,5 @@ class UpdateDeliveryStatus extends DeliveryStatusEvent {
   });
 
   @override
-  // TODO: implement props
   List<Object?> get props => [deliveryId, deliveryStatusId];
 }

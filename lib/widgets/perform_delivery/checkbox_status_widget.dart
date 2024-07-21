@@ -3,7 +3,8 @@ import '../../styles/theme.dart';
 
 class CheckboxStatusWidget extends StatelessWidget {
   final bool value;
-  final ValueChanged<bool?> onChanged;
+  // final void Function(bool?)? onChanged;
+  final ValueChanged<bool?>? onChanged;
   final String title;
   final bool isLocked;
 
@@ -23,7 +24,7 @@ class CheckboxStatusWidget extends StatelessWidget {
       // Tùy chỉnh chiều cao và chiều rộng
       visualDensity: const VisualDensity(vertical: -4.0),
       // Thay đổi màu viền
-      side: const BorderSide(color: Colors.grey),
+      side: BorderSide(color: isLocked ? Colors.grey : Colors.grey),
       activeColor: isLocked ? Colors.grey : AppColors.activeColor,
       checkColor: AppColors.checkColor,
       value: value,

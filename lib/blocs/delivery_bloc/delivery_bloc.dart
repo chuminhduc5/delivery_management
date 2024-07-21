@@ -20,7 +20,7 @@ class DeliveryBloc extends Bloc<DeliveryEvent, DeliveryState> {
       final List<Delivery> items = await deliveryService.fetchDelivery();
       emit(DeliverySuccess(items: items));
     } catch (e) {
-      emit(DeliveryFailed(message: e.toString()));
+      emit(DeliveryFailed(message: 'Không lấy được dữ liệu'));
     }
   }
 }

@@ -20,7 +20,6 @@ class DeliveryStatusFetchSuccess extends DeliveryStatusState {
   const DeliveryStatusFetchSuccess({required this.items});
 
   @override
-  // TODO: implement props
   List<Object?> get props => [items];
 }
 
@@ -29,7 +28,6 @@ class DeliveryStatusFetchFailed extends DeliveryStatusState {
   const DeliveryStatusFetchFailed({required this.message});
 
   @override
-  // TODO: implement props
   List<Object?> get props => [message];
 }
 
@@ -51,6 +49,5 @@ class UpdateDeliveryStatusFailed extends DeliveryStatusState {
   const UpdateDeliveryStatusFailed({required this.message});
 
   @override
-  // TODO: implement props
   List<Object?> get props => [message];
 }

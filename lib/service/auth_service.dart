@@ -3,6 +3,8 @@ import 'package:delivery_management/apis/api_endpoint.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../models/user.dart';
+
 class AuthService {
   Future<String> authenticateUser(String username, String password) async {
     print("--------------start---------- " );
@@ -30,6 +32,8 @@ class AuthService {
       print("-----------------success------------------");
       final responseBody = jsonDecode(response.body);
       return responseBody['data']['jwt'];
+      // final authResponse = AuthResponse.fromJson(responseBody);
+      // return authResponse.jwt; // Return JWT from authResponse
     } else {
       print('---------------Response status---------------------: ${response.statusCode}');
       print('----------------------Response body-------------------: ${response.body}');

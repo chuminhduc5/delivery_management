@@ -1,5 +1,5 @@
 class ApiEndpoint {
-  static const String baseUrl = 'http://192.168.3.169:5001';
+  static const String baseUrl = 'http://192.168.3.186:5001';
   // TODO: Config API
   // Auth - Đăng nhập
   static const String POST_AUTH_LOGIN = 'http://apis-pos-dev.hacom.vn/api-master/api/v1/Auth/login';

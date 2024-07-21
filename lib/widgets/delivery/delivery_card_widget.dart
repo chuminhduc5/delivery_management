@@ -2,6 +2,7 @@ import 'package:delivery_management/models/delivery.dart';
 import 'package:delivery_management/models/delivery_status.dart';
 import 'package:flutter/material.dart';
 import '../../styles/theme.dart';
+import 'package:intl/intl.dart';
 
 class DeliveryCardWidget extends StatelessWidget {
   final Delivery delivery;
@@ -67,10 +68,18 @@ class DeliveryCardWidget extends StatelessWidget {
                               fontWeight: FontWeight.w600),
                         ),
                       ),
-                      Text(
-                        delivery.createDate,
-                        style: const TextStyle(
-                            fontSize: 13, color: AppColors.textBlack),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            DateFormat('dd/MM/yyyy').format(delivery.lastUpdateDate),
+                            style: const TextStyle(fontSize: 13, color: Colors.black),
+                          ),
+                          Text(
+                            DateFormat('ss:mm:HH').format(delivery.lastUpdateDate),
+                            style: const TextStyle(fontSize: 13, color: Colors.black),
+                          ),
+                        ],
                       ),
                     ],
                   ),

@@ -40,15 +40,15 @@ class MyApp extends StatelessWidget {
               DeliveryBloc(DeliveryService())..add(DeliveryFetchRequested()),
         ),
         BlocProvider(
-          create: (context) =>
-              TechniqueBloc(TechniqueService())..add(TechniqueFetchRequested()),
-        ),
-        BlocProvider(
           create: (context) => DeliveryStatusBloc(DeliveryStatusService())
             ..add(DeliveryStatusFetch()),
         ),
         BlocProvider(
           create: (context) => ReasonReturnBloc(ReasonReturnService()),
+        ),
+        BlocProvider(
+          create: (context) =>
+              TechniqueBloc(TechniqueService())..add(TechniqueFetchRequested()),
         ),
       ],
       child: MaterialApp(

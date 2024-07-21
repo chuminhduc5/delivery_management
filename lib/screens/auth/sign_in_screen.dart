@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/sign_in_bloc/sign_in_bloc.dart';
-import '../../utils/error_message_utils.dart';
+import '../../utils/message_utils.dart';
 import '../../widgets/auth/button_widget.dart';
 import '../../widgets/auth/text_field_auth_widget.dart';
 
@@ -28,7 +28,7 @@ class _SignInScreenState extends State<SignInScreen> {
       body: BlocConsumer<SignInBloc, SignInState>(
         listener: (context, state) {
           if (state is SignInFailure) {
-            errorMessageUtils(context, message: 'Đăng nhập thất bại');
+            MessageUtils.errorMessageUtils(context, message: 'Đăng nhập thất bại');
           } else if (state is SignInSuccess) {
             Navigator.pushAndRemoveUntil(
                 context,

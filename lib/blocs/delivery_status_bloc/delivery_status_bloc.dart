@@ -28,7 +28,7 @@ class DeliveryStatusBloc
       final List<DeliveryStatus> items = await deliveryStatusService.fetchDeliveryStatus();
       emit(DeliveryStatusFetchSuccess(items: items));
     } catch (e) {
-      emit(DeliveryStatusFetchFailed(message: e.toString()));
+      emit(const DeliveryStatusFetchFailed(message: 'Không lấy được dữ liệu'));
     }
   }
 
@@ -37,16 +37,19 @@ class DeliveryStatusBloc
       UpdateDeliveryStatus event, Emitter<DeliveryStatusState> emit) async {
     emit(UpdateDeliveryStatusLoading());
     try {
+      // final updatedOrder = await deliveryStatusService.updateDeliveryStatus(
+      //   event.deliveryId,
+      //   event.deliveryStatusId,
+      // );
+      // emit(UpdateDeliveryStatusSuccess(updatedOrder: updatedOrder));
       await deliveryStatusService.updateDeliveryStatus(
         event.deliveryId,
         event.deliveryStatusId,
       );
       final updatedOrder = await deliveryStatusService.fetchDeliveryStatus();
-      await Future.delayed(const Duration(seconds: 1), () {
-        emit(UpdateDeliveryStatusSuccess(updatedOrder: updatedOrder));
-      });
+      emit(UpdateDeliveryStatusSuccess(updatedOrder: updatedOrder));
     } catch (e) {
-      emit(UpdateDeliveryStatusFailed(message: e.toString()));
+      emit(const UpdateDeliveryStatusFailed(message: 'Cập nhật thất bại'));
     }
   }
 }
