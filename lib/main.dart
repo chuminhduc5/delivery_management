@@ -9,6 +9,7 @@ import 'package:delivery_management/screens/main_screen/report_screen.dart';
 import 'package:delivery_management/screens/main_screen/technique_screen.dart';
 import 'package:delivery_management/screens/secondary_screen/notification_screen.dart';
 import 'package:delivery_management/screens/secondary_screen/qr_code_screen.dart';
+import 'package:delivery_management/screens/secondary_screen/sell_options_screen.dart';
 import 'package:delivery_management/service/auth_service.dart';
 import 'package:delivery_management/service/delivery_service.dart';
 import 'package:delivery_management/service/delivery_status_service.dart';
@@ -54,17 +55,36 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         initialRoute: '/',
         routes: {
-          '/app': (context) => const AppView(),
+          //'/app': (context) => const AppView(),
           '/signIn': (context) => const SignInScreen(),
-          '/home': (context) => const HomeScreen(),
+          //'/home': (context) => const HomeScreen(),
           '/delivery': (context) => const DeliveryScreen(),
           '/technique': (context) => const TechniqueScreen(),
           '/report': (context) => const ReportScreen(),
+          '/sellOptions': (context) => const SellOptionsScreen(),
           '/notification': (context) => const NotificationScreen(),
           '/qrCode': (context) => const QrCodeScreen(),
         },
         home: const SignInScreen(),
         debugShowCheckedModeBanner: false,
+        onGenerateRoute: (settings) {
+          if (settings.name == '/app') {
+            final args = settings.arguments as Map<String, dynamic>;
+            return MaterialPageRoute(
+              builder: (context) {
+                return AppView(fullName: args['fullName']);
+              },
+            );
+          } else if (settings.name == '/home') {
+            final args = settings.arguments as Map<String, dynamic>;
+            return MaterialPageRoute(
+              builder: (context) {
+                return HomeScreen(fullName: args['fullName']);
+              },
+            );
+          }
+          return null;
+        },
       ),
     );
   }

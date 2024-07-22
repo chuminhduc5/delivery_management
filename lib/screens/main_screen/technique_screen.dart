@@ -26,6 +26,18 @@ class _TechniqueScreenState extends State<TechniqueScreen> {
     final double maxWidthScreen = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: AppColors.bgColor,
+      appBar: AppBar(
+        backgroundColor: AppColors.bgAppbar,
+        flexibleSpace: const Center(child: Text( 'Danh sách đơn hàng KTKT', style: TextStyle(fontSize: 20, color: AppColors.textWhile),)),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/notification');
+              },
+              icon: const Icon(Icons.notifications))
+        ],
+        iconTheme: const IconThemeData(color: AppColors.white),
+      ),
       body: BlocBuilder<TechniqueBloc, TechniqueState>(
         builder: (context, state) {
           if (state is TechniqueLoading) {

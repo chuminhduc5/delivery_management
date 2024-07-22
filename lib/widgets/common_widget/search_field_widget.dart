@@ -1,3 +1,4 @@
+import 'package:delivery_management/styles/theme.dart';
 import 'package:flutter/material.dart';
 
 class SearchFieldWidget extends StatelessWidget {
@@ -25,13 +26,13 @@ class SearchFieldWidget extends StatelessWidget {
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(
-                color: Colors.grey,
+                color: AppColors.grey,
                 width: 0,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.black, width: 2),
+              borderSide: const BorderSide(color: AppColors.green, width: 2),
             ),
             hintText: hintText,
             hintStyle: const TextStyle(color: Colors.grey, fontSize: 13)

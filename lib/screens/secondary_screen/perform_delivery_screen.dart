@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../blocs/delivery_status_bloc/delivery_status_bloc.dart';
 import '../../models/delivery.dart';
 import '../../styles/theme.dart';
+import '../../widgets/common_widget/lock_status_management.dart';
 import '../../widgets/perform_delivery/billing_infomation_widget.dart';
 import '../../widgets/perform_delivery/button_confirm_widget.dart';
 import '../../widgets/perform_delivery/delivery_infomation_widget.dart';
@@ -22,14 +23,14 @@ class _PerformDeliveryScreenState extends State<PerformDeliveryScreen> {
   late Delivery deliveryStatus;
   int selectedStatusId = 0;
   String selectedStatusName = '';
-  List<int> lockedStatusIds = [];
+  final LockedStatusManager lockedStatusManager = LockedStatusManager();
 
   @override
   void initState() {
     super.initState();
     deliveryStatus = widget.deliveryStatus;
     selectedStatusId = deliveryStatus.statusId;
-    lockedStatusIds.add(deliveryStatus.statusId);
+    lockedStatusManager.addLockedStatus(deliveryStatus.statusId);
   }
 
   void onStatusChanged(int value, String name) {
@@ -40,15 +41,13 @@ class _PerformDeliveryScreenState extends State<PerformDeliveryScreen> {
   }
 
   void onConfirm() async {
-    // Gửi sự kiện cập nhật trạng thái
     context.read<DeliveryStatusBloc>().add(
       UpdateDeliveryStatus(
-        deliveryId: (deliveryStatus.id).toString(),
+        deliveryId: deliveryStatus.id.toString(),
         deliveryStatusId: selectedStatusId.toString(),
       ),
     );
 
-    // Hiển thị một hộp thoại để thông báo cho người dùng
     showDialog(
       context: context,
       builder: (context) =>
@@ -68,13 +67,11 @@ class _PerformDeliveryScreenState extends State<PerformDeliveryScreen> {
                   ),
                 );
                 setState(() {
-                  if (!lockedStatusIds.contains(selectedStatusId)) {
-                    lockedStatusIds.add(selectedStatusId);
-                  }
+                  lockedStatusManager.addLockedStatus(selectedStatusId);
                 });
                 MessageUtils.successMessageUtils(context, message: 'Cập nhật thành công');
               } else if (state is UpdateDeliveryStatusFailed) {
-                Navigator.pop(context); // Đóng hộp thoại thông báo
+                Navigator.pop(context);
                 MessageUtils.errorMessageUtils(context,
                     message: 'Cập nhật trạng thái thất bại: ${state.message}');
               }
@@ -86,7 +83,6 @@ class _PerformDeliveryScreenState extends State<PerformDeliveryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final double maxWidthScreen = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: AppColors.bgColor,
       appBar: AppBar(
@@ -120,7 +116,7 @@ class _PerformDeliveryScreenState extends State<PerformDeliveryScreen> {
                     onStatusChanged: onStatusChanged,
                     initialStatusId: selectedStatusId,
                     initialStatusName: selectedStatusName,
-                    lockedStatusIds: lockedStatusIds,
+                    lockedStatusManager: lockedStatusManager,
                   ),
                   const BillingInfomationWidget(),
                   Container(
@@ -139,3 +135,4 @@ class _PerformDeliveryScreenState extends State<PerformDeliveryScreen> {
     );
   }
 }
+

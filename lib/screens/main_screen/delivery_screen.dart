@@ -41,13 +41,31 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.bgColor,
+      appBar: AppBar(
+        backgroundColor: AppColors.bgAppbar,
+        flexibleSpace: const Center(
+            child: Text(
+          'Danh sách giao vận',
+          style: TextStyle(fontSize: 20, color: AppColors.textWhile),
+        )),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/notification');
+              },
+              icon: const Icon(Icons.notifications))
+        ],
+        iconTheme: const IconThemeData(color: AppColors.white),
+      ),
       body: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => DeliveryBloc(DeliveryService())..add(DeliveryFetchRequested()),
+            create: (context) =>
+                DeliveryBloc(DeliveryService())..add(DeliveryFetchRequested()),
           ),
           BlocProvider(
-            create: (context) => DeliveryStatusBloc(DeliveryStatusService())..add(DeliveryStatusFetch()),
+            create: (context) => DeliveryStatusBloc(DeliveryStatusService())
+              ..add(DeliveryStatusFetch()),
           ),
         ],
         child: BlocConsumer<DeliveryBloc, DeliveryState>(
@@ -64,17 +82,24 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                 builder: (context, deliveryStatusState) {
                   if (deliveryStatusState is DeliveryStatusFetchLoading) {
                     return const Center(child: CircularProgressIndicator());
-                  } else if (deliveryStatusState is DeliveryStatusFetchSuccess) {
-                    final statusList = deliveryStatusState.items.cast<DeliveryStatus>();
+                  } else if (deliveryStatusState
+                      is DeliveryStatusFetchSuccess) {
+                    final statusList =
+                        deliveryStatusState.items.cast<DeliveryStatus>();
                     return RefreshIndicator(
                       onRefresh: () async {
-                        context.read<DeliveryBloc>().add(DeliveryFetchRequested());
-                        context.read<DeliveryStatusBloc>().add(DeliveryStatusFetch());
+                        context
+                            .read<DeliveryBloc>()
+                            .add(DeliveryFetchRequested());
+                        context
+                            .read<DeliveryStatusBloc>()
+                            .add(DeliveryStatusFetch());
                       },
                       child: Column(
                         children: [
                           Container(
-                            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 15),
                             child: SearchFieldWidget(
                               size: maxWidthScreen,
                               hintText: 'Tìm kiếm',
@@ -91,7 +116,8 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                     final updatedOrder = await Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => PerformDeliveryScreen(
+                                        builder: (context) =>
+                                            PerformDeliveryScreen(
                                           deliveryStatus: delivery,
                                         ),
                                       ),
@@ -101,11 +127,14 @@ class _DeliveryScreenState extends State<DeliveryScreen> {
                                         state.items[index] = updatedOrder;
                                       });
                                     }
-                                    context.read<DeliveryBloc>().add(DeliveryFetchRequested());
+                                    context
+                                        .read<DeliveryBloc>()
+                                        .add(DeliveryFetchRequested());
                                   },
                                   child: DeliveryCardWidget(
                                     delivery: delivery,
-                                    statusList: statusList, // Pass statusList here
+                                    statusList:
+                                        statusList, // Pass statusList here
                                   ),
                                 );
                               },

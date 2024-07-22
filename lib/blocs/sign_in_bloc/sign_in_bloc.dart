@@ -20,13 +20,14 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
 
       print("-----------------payload: $username --- $password");
       // Call API để đăng nhập
-      final token = await authService.authenticateUser(username, password);
-      print("-----------------response: $token");
+      //final token = await authService.authenticateUser(username, password);
+      final authResponse = await authService.authenticateUser(username, password);
+      print("-----------------response: $authResponse");
       // Lưu token vào Shared Preferences
-      await authService.saveToken(token);
+      await authService.saveToken(authResponse.jwt);
 
       await Future.delayed(const Duration(seconds: 1), (){
-        return emit(SignInSuccess(uid: token));
+        return emit(SignInSuccess(uid: authResponse.jwt, fullName: authResponse.fullName));
       });
     }catch (e){
       print('Login failed: $e'); // Log lỗi

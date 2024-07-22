@@ -7,8 +7,24 @@ class ReportScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
         backgroundColor: AppColors.bgColor,
-        body: Center(child: Text('ReportScreen')));
+        appBar: AppBar(
+          backgroundColor: AppColors.bgAppbar,
+          flexibleSpace: const Center(
+              child: Text(
+            'Báo cáo',
+            style: TextStyle(fontSize: 20, color: AppColors.textWhile),
+          )),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/notification');
+                },
+                icon: const Icon(Icons.notifications))
+          ],
+          iconTheme: const IconThemeData(color: AppColors.white),
+        ),
+        body: const Center(child: Text('ReportScreen')));
   }
 }

@@ -9,14 +9,14 @@ class ButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
+      height: 45,
       width: MediaQuery.of(context).size.width,
       child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,
               backgroundColor: AppColors.bgAppbar,
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(5.0),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               )),

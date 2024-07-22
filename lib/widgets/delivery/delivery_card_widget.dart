@@ -8,7 +8,7 @@ class DeliveryCardWidget extends StatelessWidget {
   final Delivery delivery;
   final List<DeliveryStatus> statusList;
 
-  const DeliveryCardWidget(
+  const   DeliveryCardWidget(
       {super.key, required this.delivery, required this.statusList});
 
   Color _statusColorBg(String status){
@@ -24,6 +24,16 @@ class DeliveryCardWidget extends StatelessWidget {
   Color _statusColor(String status){
     const delivered = Colors.green;
     const delivering = Colors.red;
+
+    if (status == "Hàng đã giao" || status == "Hàng đã giao - nối chuyến") {
+      return delivered;
+    }
+    return delivering;
+  }
+
+  Icon _statusIcon(String status){
+    const delivered = Icon(Icons.check_circle, size: 20, color: Colors.green,);
+    const delivering = Icon(Icons.local_shipping_outlined, size: 20, color: Colors.red,);
 
     if (status == "Hàng đã giao" || status == "Hàng đã giao - nối chuyến") {
       return delivered;
@@ -60,12 +70,18 @@ class DeliveryCardWidget extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                           color: _statusColorBg(statusName),
                         ),
-                        child: Text(
-                          statusName,
-                          style: TextStyle(
-                              color: _statusColor(statusName),
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600),
+                        child: Row(
+                          children: [
+                            _statusIcon(statusName),
+                            const SizedBox(width: 5,),
+                            Text(
+                              statusName,
+                              style: TextStyle(
+                                  color: _statusColor(statusName),
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ],
                         ),
                       ),
                       Column(

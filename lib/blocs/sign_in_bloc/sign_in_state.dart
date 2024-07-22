@@ -9,8 +9,9 @@ class SignInInitial extends SignInState {}
 // Trạng thái đăng nhập thành công
 class SignInSuccess extends SignInState {
   final String uid;
+  final String fullName;
 
-  SignInSuccess({required this.uid});
+  SignInSuccess({required this.uid, required this.fullName});
 }
 
 // Trạng thái đăng nhập thất bại

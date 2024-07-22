@@ -7,7 +7,8 @@ import 'package:delivery_management/styles/theme.dart';
 import 'package:flutter/material.dart';
 
 class AppView extends StatefulWidget {
-  const AppView({super.key});
+  final String fullName;
+  const AppView({super.key, required this.fullName});
 
   @override
   State<AppView> createState() => _AppViewState();
@@ -28,16 +29,8 @@ class _AppViewState extends State<AppView> {
     );
   }
 
-  final List<String> _title = [
-    'Trang chủ',
-    'Danh sách giao vận',
-    'Danh sách đơn hàng KTKT',
-    'Báo cáo',
-    'Cài đặt'
-  ];
-
-  final List<Widget> _screens = [
-    const HomeScreen(),
+  List<Widget> get _screens => [
+    HomeScreen(fullName: widget.fullName),
     const DeliveryScreen(),
     const TechniqueScreen(),
     const ReportScreen(),
@@ -47,18 +40,6 @@ class _AppViewState extends State<AppView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.bgAppbar,
-        flexibleSpace: Center(child: Text(_title[_selectedIndex], style: const TextStyle(fontSize: 20, color: AppColors.textWhile),)),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/notification');
-              },
-              icon: const Icon(Icons.notifications))
-        ],
-        iconTheme: const IconThemeData(color: AppColors.white),
-      ),
       body: PageView(
         controller: _pageController,
         onPageChanged: (index) {

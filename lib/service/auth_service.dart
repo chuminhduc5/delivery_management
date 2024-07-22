@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user.dart';
 
 class AuthService {
-  Future<String> authenticateUser(String username, String password) async {
+  Future<AuthResponse> authenticateUser(String username, String password) async {
     print("--------------start---------- " );
     const url = ApiEndpoint.POST_AUTH_LOGIN;
     final uri = Uri.parse(url);
@@ -31,9 +31,8 @@ class AuthService {
     if (response.statusCode == 200) {
       print("-----------------success------------------");
       final responseBody = jsonDecode(response.body);
-      return responseBody['data']['jwt'];
-      // final authResponse = AuthResponse.fromJson(responseBody);
-      // return authResponse.jwt; // Return JWT from authResponse
+      //return responseBody['data']['jwt'];
+      return AuthResponse.fromJson(responseBody);
     } else {
       print('---------------Response status---------------------: ${response.statusCode}');
       print('----------------------Response body-------------------: ${response.body}');

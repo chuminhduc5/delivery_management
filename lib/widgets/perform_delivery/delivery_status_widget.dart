@@ -8,19 +8,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../models/delivery_status.dart';
 import '../../styles/theme.dart';
+import '../common_widget/lock_status_management.dart';
 
 class DeliveryStatusWidget extends StatefulWidget {
   final Function(int id, String name) onStatusChanged;
   final int initialStatusId;
   final String initialStatusName;
-  final List<int> lockedStatusIds;
+  final LockedStatusManager lockedStatusManager;
 
   const DeliveryStatusWidget({
     super.key,
     required this.onStatusChanged,
     required this.initialStatusId,
     required this.initialStatusName,
-    required this.lockedStatusIds,
+    required this.lockedStatusManager,
   });
 
   @override
@@ -29,6 +30,9 @@ class DeliveryStatusWidget extends StatefulWidget {
 
 class _DeliveryStatusWidgetState extends State<DeliveryStatusWidget> {
   late Set<int> selectedStatusIds;
+
+  // Danh sách trạng thái theo thứ tự cụ thể
+  final List<int> deliveryStatusIds = [3, 5, 6, 4, 8, 7];
 
   @override
   void initState() {
@@ -48,14 +52,37 @@ class _DeliveryStatusWidgetState extends State<DeliveryStatusWidget> {
   }
 
   bool isStatusLocked(int statusId) {
-    return widget.lockedStatusIds.contains(statusId);
+    return widget.lockedStatusManager.isStatusLocked(statusId);
   }
 
-  String getNameById(List<DeliveryStatus> items, int value) {
-    final item = items.firstWhere(
-            (element) => element.value == value.toString(),
-        orElse: () => const DeliveryStatus(value: '', name: ''));
-    return item.name;
+  List<Widget> buildStatusCheckboxes(List<DeliveryStatus> items) {
+    final Map<int, DeliveryStatus> statusMap = {
+      for (var status in items) status.intValue: status
+    };
+
+    return deliveryStatusIds
+        .where((id) => statusMap.containsKey(id))
+        .map((id) {
+      final status = statusMap[id]!;
+      return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+        margin: const EdgeInsets.only(bottom: 10),
+        decoration: BoxDecoration(
+          color: Colors.green[100],
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: CheckboxStatusWidget(
+          value: selectedStatusIds.contains(status.intValue),
+          onChanged: isStatusLocked(status.intValue)
+              ? null
+              : (bool? value) {
+            updateSelectedStatus(status.intValue, status.name);
+          },
+          title: status.name,
+          isLocked: isStatusLocked(status.intValue),
+        ),
+      );
+    }).toList();
   }
 
   @override
@@ -75,41 +102,17 @@ class _DeliveryStatusWidgetState extends State<DeliveryStatusWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // CheckBox Status
-                  Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text("Tình trạng giao vận",
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                                color: AppColors.bgAppbar)),
-                        const SizedBox(height: 5),
-                        ...items.map((status) {
-                          return Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 3),
-                            margin: const EdgeInsets.only(bottom: 10),
-                            decoration: BoxDecoration(
-                              color: Colors.green[100],
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: CheckboxStatusWidget(
-                              value:
-                              selectedStatusIds.contains(status.intValue),
-                              onChanged: isStatusLocked(status.intValue)
-                                  ? null
-                                  : (bool? value) {
-                                updateSelectedStatus(
-                                    status.intValue, status.name);
-                              },
-                              title: status.name,
-                              isLocked: isStatusLocked(status.intValue),
-                            ),
-                          );
-                        }).toList()
-                      ],
-                    ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text("Tình trạng giao vận",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.bgAppbar)),
+                      const SizedBox(height: 5),
+                      ...buildStatusCheckboxes(items),
+                    ],
                   ),
                   // Dropdown item
                   Container(
@@ -123,13 +126,9 @@ class _DeliveryStatusWidgetState extends State<DeliveryStatusWidget> {
                               fontWeight: FontWeight.w600,
                               color: AppColors.bgAppbar),
                         ),
-                        SizedBox(
-                          height: 5,
-                        ),
+                        SizedBox(height: 5),
                         SelectReturnedGoodWidget(),
-                        SizedBox(
-                          height: 10,
-                        ),
+                        SizedBox(height: 10),
                         Text(
                           'Lý do trả lại:',
                           style: TextStyle(
@@ -137,24 +136,17 @@ class _DeliveryStatusWidgetState extends State<DeliveryStatusWidget> {
                               fontWeight: FontWeight.w600,
                               color: AppColors.bgAppbar),
                         ),
-                        SizedBox(
-                          height: 5,
-                        ),
+                        SizedBox(height: 5),
                         SelectReasonReturnWidget(),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        SelectReasonReturnWidget(),
+                        SizedBox(height: 10),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             );
-          } else if (state is DeliveryStatusFetchFailed) {
-            return Text(state.message);
           } else {
-            return const SizedBox();
+            return const Center(child: Text('Error'));
           }
         },
       ),
